@@ -44,7 +44,7 @@
       "adapter": "csv",
       "enabled": false,
       "official_url": "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/",
-      "note": "PMDA 医药品情报检索，手工导出后导入"
+      "note": "PMDA 医療用医薬品情報検索，已抓取 347 个 API 对应 682 条上市产品（2026-07-24）；后续增量走 import_pmda.py"
     },
     {
       "code": "NMPA",
