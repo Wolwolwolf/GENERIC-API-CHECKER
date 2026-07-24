@@ -376,9 +376,9 @@ const DATA = __WIDGET_DATA__;
     const W = 86, H = 34;
     let s = `<defs>
       <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-        <path d="M0,0 L8,4 L0,8 z" fill="var(--kimi-color-accent)"/></marker>
+        <path d="M0,0 L8,4 L0,8 z" fill="var(--kimi-color-accent, #2f6fed)"/></marker>
       <linearGradient id="ng" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="var(--kimi-color-accent)"/><stop offset="1" stop-color="#7c5cff"/></linearGradient>
+        <stop offset="0" stop-color="var(--kimi-color-accent, #2f6fed)"/><stop offset="1" stop-color="#7c5cff"/></linearGradient>
     </defs>`;
     const drawn = new Set();
     for (const e of edges) {
@@ -390,19 +390,19 @@ const DATA = __WIDGET_DATA__;
       const x1 = a.x, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2;
       const mx = (x1 + x2) / 2, my = (y1 + y2) / 2 - 16;
       s += `<path d="M${x1},${y1} Q${mx},${my} ${x2},${y2}" fill="none"
-        stroke="var(--kimi-color-accent)" stroke-width="1.4"
+        stroke="var(--kimi-color-accent, #2f6fed)" stroke-width="1.4"
         stroke-dasharray="4 3" marker-end="url(#ar)" opacity="0.6"/>
         <text x="${mx}" y="${my + 3}" text-anchor="middle" font-size="9.5"
-        fill="var(--kimi-color-text-tertiary)">${esc(e.label)}</text>`;
+        fill="var(--kimi-color-text-tertiary, #6a737d)">${esc(e.label)}</text>`;
     }
     for (const [code, n] of Object.entries(NODES)) {
       const approved = approvedRegions.has(code);
       const usable = !approved && usableRegions.has(code);
-      const fill = approved ? 'url(#ng)' : 'var(--kimi-color-surface-raised)';
+      const fill = approved ? 'url(#ng)' : 'var(--kimi-color-surface-raised, #ffffff)';
       const stroke = approved ? 'none'
-        : usable ? 'var(--kimi-color-accent)' : 'var(--kimi-color-border)';
+        : usable ? 'var(--kimi-color-accent, #2f6fed)' : 'var(--kimi-color-border, #d0d7de)';
       const dash = usable ? ' stroke-dasharray="5 3" stroke-width="1.8"' : '';
-      const tc = approved ? '#fff' : 'var(--kimi-color-text-primary)';
+      const tc = approved ? '#fff' : 'var(--kimi-color-text-primary, #24292f)';
       s += `<rect x="${n.x - W / 2}" y="${n.y}" width="${W}" height="${H}" rx="10"
         fill="${fill}" stroke="${stroke}"${dash || ' stroke-width="1"'}/>
         <text x="${n.x}" y="${n.y + H / 2 + 4}" text-anchor="middle" font-size="11.5"
