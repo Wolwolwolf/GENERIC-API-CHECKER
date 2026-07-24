@@ -1,44 +1,1447 @@
 {
   "_comment": "仿制药 API 中英双语别名库。键为英文通用名（小写），值含中文名与常见英文变体。可持续扩充。",
-  "atorvastatin": { "zh": "阿托伐他汀", "variants": ["atorvastatin calcium"] },
-  "amlodipine": { "zh": "氨氯地平", "variants": ["amlodipine besylate"] },
-  "metformin": { "zh": "二甲双胍", "variants": ["metformin hydrochloride"] },
-  "losartan": { "zh": "氯沙坦", "variants": ["losartan potassium"] },
-  "simvastatin": { "zh": "辛伐他汀", "variants": [] },
-  "rosuvastatin": { "zh": "瑞舒伐他汀", "variants": ["rosuvastatin calcium"] },
-  "omeprazole": { "zh": "奥美拉唑", "variants": [] },
-  "esomeprazole": { "zh": "埃索美拉唑", "variants": ["esomeprazole magnesium"] },
-  "levothyroxine": { "zh": "左甲状腺素", "variants": ["levothyroxine sodium"] },
-  "amoxicillin": { "zh": "阿莫西林", "variants": [] },
-  "azithromycin": { "zh": "阿奇霉素", "variants": [] },
-  "ciprofloxacin": { "zh": "环丙沙星", "variants": ["ciprofloxacin hydrochloride"] },
-  "ibuprofen": { "zh": "布洛芬", "variants": [] },
-  "paracetamol": { "zh": "对乙酰氨基酚", "variants": ["acetaminophen"] },
-  "acetaminophen": { "zh": "对乙酰氨基酚", "variants": ["paracetamol"] },
-  "loratadine": { "zh": "氯雷他定", "variants": [] },
-  "montelukast": { "zh": "孟鲁司特", "variants": ["montelukast sodium"] },
-  "fexofenadine": { "zh": "非索非那定", "variants": ["fexofenadine hydrochloride"] },
-  "tamsulosin": { "zh": "坦索罗辛", "variants": ["tamsulosin hydrochloride"] },
-  "sildenafil": { "zh": "西地那非", "variants": ["sildenafil citrate"] },
-  "tadalafil": { "zh": "他达拉非", "variants": [] },
-  "clopidogrel": { "zh": "氯吡格雷", "variants": ["clopidogrel bisulfate"] },
-  "warfarin": { "zh": "华法林", "variants": ["warfarin sodium"] },
-  "apixaban": { "zh": "阿哌沙班", "variants": [] },
-  "rivaroxaban": { "zh": "利伐沙班", "variants": [] },
-  "empagliflozin": { "zh": "恩格列净", "variants": [] },
-  "dapagliflozin": { "zh": "达格列净", "variants": [] },
-  "sitagliptin": { "zh": "西格列汀", "variants": ["sitagliptin phosphate"] },
-  "lisinopril": { "zh": "赖诺普利", "variants": [] },
-  "valsartan": { "zh": "缬沙坦", "variants": [] },
-  "hydrochlorothiazide": { "zh": "氢氯噻嗪", "variants": [] },
-  "gabapentin": { "zh": "加巴喷丁", "variants": [] },
-  "pregabalin": { "zh": "普瑞巴林", "variants": [] },
-  "sertraline": { "zh": "舍曲林", "variants": ["sertraline hydrochloride"] },
-  "escitalopram": { "zh": "艾司西酞普兰", "variants": ["escitalopram oxalate"] },
-  "fluoxetine": { "zh": "氟西汀", "variants": ["fluoxetine hydrochloride"] },
-  "quetiapine": { "zh": "喹硫平", "variants": ["quetiapine fumarate"] },
-  "olanzapine": { "zh": "奥氮平", "variants": [] },
-  "donepezil": { "zh": "多奈哌齐", "variants": ["donepezil hydrochloride"] },
-  "insulin glargine": { "zh": "甘精胰岛素", "variants": [] },
-  "adalimumab": { "zh": "阿达木单抗", "variants": [] }
+  "atorvastatin": {
+    "zh": "阿托伐他汀",
+    "variants": [
+      "atorvastatin calcium"
+    ]
+  },
+  "amlodipine": {
+    "zh": "氨氯地平",
+    "variants": [
+      "amlodipine besylate"
+    ]
+  },
+  "metformin": {
+    "zh": "二甲双胍",
+    "variants": [
+      "metformin hydrochloride"
+    ]
+  },
+  "losartan": {
+    "zh": "氯沙坦",
+    "variants": [
+      "losartan potassium"
+    ]
+  },
+  "simvastatin": {
+    "zh": "辛伐他汀",
+    "variants": []
+  },
+  "rosuvastatin": {
+    "zh": "瑞舒伐他汀",
+    "variants": [
+      "rosuvastatin calcium"
+    ]
+  },
+  "omeprazole": {
+    "zh": "奥美拉唑",
+    "variants": []
+  },
+  "esomeprazole": {
+    "zh": "埃索美拉唑",
+    "variants": [
+      "esomeprazole magnesium"
+    ]
+  },
+  "levothyroxine": {
+    "zh": "左甲状腺素",
+    "variants": [
+      "levothyroxine sodium"
+    ]
+  },
+  "amoxicillin": {
+    "zh": "阿莫西林",
+    "variants": []
+  },
+  "azithromycin": {
+    "zh": "阿奇霉素",
+    "variants": []
+  },
+  "ciprofloxacin": {
+    "zh": "环丙沙星",
+    "variants": [
+      "ciprofloxacin hydrochloride"
+    ]
+  },
+  "ibuprofen": {
+    "zh": "布洛芬",
+    "variants": []
+  },
+  "paracetamol": {
+    "zh": "对乙酰氨基酚",
+    "variants": [
+      "acetaminophen"
+    ]
+  },
+  "acetaminophen": {
+    "zh": "对乙酰氨基酚",
+    "variants": [
+      "paracetamol"
+    ]
+  },
+  "loratadine": {
+    "zh": "氯雷他定",
+    "variants": []
+  },
+  "montelukast": {
+    "zh": "孟鲁司特",
+    "variants": [
+      "montelukast sodium"
+    ]
+  },
+  "fexofenadine": {
+    "zh": "非索非那定",
+    "variants": [
+      "fexofenadine hydrochloride"
+    ]
+  },
+  "tamsulosin": {
+    "zh": "坦索罗辛",
+    "variants": [
+      "tamsulosin hydrochloride"
+    ]
+  },
+  "sildenafil": {
+    "zh": "西地那非",
+    "variants": [
+      "sildenafil citrate"
+    ]
+  },
+  "tadalafil": {
+    "zh": "他达拉非",
+    "variants": []
+  },
+  "clopidogrel": {
+    "zh": "氯吡格雷",
+    "variants": [
+      "clopidogrel bisulfate"
+    ]
+  },
+  "warfarin": {
+    "zh": "华法林",
+    "variants": [
+      "warfarin sodium"
+    ]
+  },
+  "apixaban": {
+    "zh": "阿哌沙班",
+    "variants": []
+  },
+  "rivaroxaban": {
+    "zh": "利伐沙班",
+    "variants": []
+  },
+  "empagliflozin": {
+    "zh": "恩格列净",
+    "variants": []
+  },
+  "dapagliflozin": {
+    "zh": "达格列净",
+    "variants": []
+  },
+  "sitagliptin": {
+    "zh": "西格列汀",
+    "variants": [
+      "sitagliptin phosphate"
+    ]
+  },
+  "lisinopril": {
+    "zh": "赖诺普利",
+    "variants": []
+  },
+  "valsartan": {
+    "zh": "缬沙坦",
+    "variants": []
+  },
+  "hydrochlorothiazide": {
+    "zh": "氢氯噻嗪",
+    "variants": []
+  },
+  "gabapentin": {
+    "zh": "加巴喷丁",
+    "variants": []
+  },
+  "pregabalin": {
+    "zh": "普瑞巴林",
+    "variants": []
+  },
+  "sertraline": {
+    "zh": "舍曲林",
+    "variants": [
+      "sertraline hydrochloride"
+    ]
+  },
+  "escitalopram": {
+    "zh": "艾司西酞普兰",
+    "variants": [
+      "escitalopram oxalate"
+    ]
+  },
+  "fluoxetine": {
+    "zh": "氟西汀",
+    "variants": [
+      "fluoxetine hydrochloride"
+    ]
+  },
+  "quetiapine": {
+    "zh": "喹硫平",
+    "variants": [
+      "quetiapine fumarate"
+    ]
+  },
+  "olanzapine": {
+    "zh": "奥氮平",
+    "variants": []
+  },
+  "donepezil": {
+    "zh": "多奈哌齐",
+    "variants": [
+      "donepezil hydrochloride"
+    ]
+  },
+  "insulin glargine": {
+    "zh": "甘精胰岛素",
+    "variants": []
+  },
+  "adalimumab": {
+    "zh": "阿达木单抗",
+    "variants": []
+  },
+  "oseltamivir": {
+    "zh": "奥司他韦",
+    "variants": []
+  },
+  "potassium chloride": {
+    "zh": "氯化钾",
+    "variants": []
+  },
+  "cefuroxime": {
+    "zh": "头孢呋辛",
+    "variants": []
+  },
+  "ambroxol": {
+    "zh": "氨溴索",
+    "variants": []
+  },
+  "cefoperazone": {
+    "zh": "头孢哌酮",
+    "variants": []
+  },
+  "sulbactam": {
+    "zh": "舒巴坦",
+    "variants": []
+  },
+  "ceftazidime": {
+    "zh": "头孢他啶",
+    "variants": []
+  },
+  "vonoprazan": {
+    "zh": "伏诺拉生",
+    "variants": []
+  },
+  "ceftizoxime": {
+    "zh": "头孢唑肟",
+    "variants": []
+  },
+  "levofloxacin": {
+    "zh": "左氧氟沙星",
+    "variants": []
+  },
+  "ceftriaxone": {
+    "zh": "头孢曲松",
+    "variants": []
+  },
+  "cefotaxime": {
+    "zh": "头孢噻肟",
+    "variants": []
+  },
+  "febuxostat": {
+    "zh": "非布司他",
+    "variants": []
+  },
+  "dapoxetine": {
+    "zh": "达泊西汀",
+    "variants": []
+  },
+  "famotidine": {
+    "zh": "法莫替丁",
+    "variants": []
+  },
+  "tranexamic acid": {
+    "zh": "氨甲环酸",
+    "variants": []
+  },
+  "glucosamine": {
+    "zh": "氨基葡萄糖",
+    "variants": []
+  },
+  "cefazolin": {
+    "zh": "头孢唑林",
+    "variants": []
+  },
+  "piracetam": {
+    "zh": "吡拉西坦",
+    "variants": []
+  },
+  "nicorandil": {
+    "zh": "尼可地尔",
+    "variants": []
+  },
+  "cefixime": {
+    "zh": "头孢克肟",
+    "variants": []
+  },
+  "memantine": {
+    "zh": "美金刚",
+    "variants": []
+  },
+  "parecoxib": {
+    "zh": "帕瑞昔布",
+    "variants": []
+  },
+  "ornidazole": {
+    "zh": "奥硝唑",
+    "variants": []
+  },
+  "urapidil": {
+    "zh": "乌拉地尔",
+    "variants": []
+  },
+  "clindamycin": {
+    "zh": "克林霉素",
+    "variants": []
+  },
+  "pramipexole": {
+    "zh": "普拉克索",
+    "variants": []
+  },
+  "benzylpenicillin": {
+    "zh": "青霉素",
+    "variants": []
+  },
+  "ticagrelor": {
+    "zh": "替格瑞洛",
+    "variants": []
+  },
+  "doxofylline": {
+    "zh": "多索茶碱",
+    "variants": []
+  },
+  "lidocaine": {
+    "zh": "利多卡因",
+    "variants": []
+  },
+  "entecavir": {
+    "zh": "恩替卡韦",
+    "variants": []
+  },
+  "pentoxifylline": {
+    "zh": "己酮可可碱",
+    "variants": []
+  },
+  "diprophylline": {
+    "zh": "二羟丙茶碱",
+    "variants": []
+  },
+  "pantoprazole": {
+    "zh": "泮托拉唑",
+    "variants": []
+  },
+  "piperacillin": {
+    "zh": "哌拉西林",
+    "variants": []
+  },
+  "tazobactam": {
+    "zh": "他唑巴坦",
+    "variants": []
+  },
+  "lacosamide": {
+    "zh": "拉考沙胺",
+    "variants": []
+  },
+  "pyridoxine": {
+    "zh": "维生素B6",
+    "variants": []
+  },
+  "magnesium sulfate": {
+    "zh": "硫酸镁",
+    "variants": []
+  },
+  "levetiracetam": {
+    "zh": "左乙拉西坦",
+    "variants": []
+  },
+  "phloroglucinol": {
+    "zh": "间苯三酚",
+    "variants": []
+  },
+  "citicoline": {
+    "zh": "胞磷胆碱",
+    "variants": []
+  },
+  "sodium bicarbonate": {
+    "zh": "碳酸氢钠",
+    "variants": []
+  },
+  "roxadustat": {
+    "zh": "罗沙司他",
+    "variants": []
+  },
+  "apremilast": {
+    "zh": "阿普米司特",
+    "variants": []
+  },
+  "dopamine": {
+    "zh": "多巴胺",
+    "variants": []
+  },
+  "mecobalamin": {
+    "zh": "甲钴胺",
+    "variants": []
+  },
+  "cefminox": {
+    "zh": "头孢米诺",
+    "variants": []
+  },
+  "cefoxitin": {
+    "zh": "头孢西丁",
+    "variants": []
+  },
+  "palbociclib": {
+    "zh": "哌柏西利",
+    "variants": []
+  },
+  "thioctic acid": {
+    "zh": "硫辛酸",
+    "variants": []
+  },
+  "hydrotalcite": {
+    "zh": "铝碳酸镁",
+    "variants": []
+  },
+  "tofacitinib": {
+    "zh": "托法替布",
+    "variants": []
+  },
+  "cefdinir": {
+    "zh": "头孢地尼",
+    "variants": []
+  },
+  "acetylcysteine": {
+    "zh": "乙酰半胱氨酸",
+    "variants": []
+  },
+  "azilsartan": {
+    "zh": "美阿沙坦",
+    "variants": []
+  },
+  "ropivacaine": {
+    "zh": "罗哌卡因",
+    "variants": []
+  },
+  "dexmedetomidine": {
+    "zh": "右美托咪定",
+    "variants": []
+  },
+  "telmisartan": {
+    "zh": "替米沙坦",
+    "variants": []
+  },
+  "torasemide": {
+    "zh": "托拉塞米",
+    "variants": []
+  },
+  "naloxone": {
+    "zh": "纳洛酮",
+    "variants": []
+  },
+  "palonosetron": {
+    "zh": "帕洛诺司琼",
+    "variants": []
+  },
+  "metoprolol": {
+    "zh": "美托洛尔",
+    "variants": []
+  },
+  "peramivir": {
+    "zh": "帕拉米韦",
+    "variants": []
+  },
+  "metoclopramide": {
+    "zh": "甲氧氯普胺",
+    "variants": []
+  },
+  "amikacin": {
+    "zh": "阿米卡星",
+    "variants": []
+  },
+  "neostigmine": {
+    "zh": "新斯的明",
+    "variants": []
+  },
+  "cefmetazole": {
+    "zh": "头孢美唑",
+    "variants": []
+  },
+  "montmorillonite": {
+    "zh": "蒙脱石",
+    "variants": []
+  },
+  "duloxetine": {
+    "zh": "度洛西汀",
+    "variants": []
+  },
+  "oxacillin": {
+    "zh": "苯唑西林",
+    "variants": []
+  },
+  "tenofovir alafenamide": {
+    "zh": "丙酚替诺福韦",
+    "variants": []
+  },
+  "finasteride": {
+    "zh": "非那雄胺",
+    "variants": []
+  },
+  "sugammadex": {
+    "zh": "舒更葡糖",
+    "variants": []
+  },
+  "nicardipine": {
+    "zh": "尼卡地平",
+    "variants": []
+  },
+  "bumetanide": {
+    "zh": "布美他尼",
+    "variants": []
+  },
+  "levocarnitine": {
+    "zh": "左卡尼汀",
+    "variants": []
+  },
+  "cephalexin": {
+    "zh": "头孢氨苄",
+    "variants": []
+  },
+  "cefaclor": {
+    "zh": "头孢克洛",
+    "variants": []
+  },
+  "pemetrexed": {
+    "zh": "培美曲塞",
+    "variants": []
+  },
+  "vortioxetine": {
+    "zh": "伏硫西汀",
+    "variants": []
+  },
+  "isoniazid": {
+    "zh": "异烟肼",
+    "variants": []
+  },
+  "tacrolimus": {
+    "zh": "他克莫司",
+    "variants": []
+  },
+  "norepinephrine": {
+    "zh": "去甲肾上腺素",
+    "variants": []
+  },
+  "iohexol": {
+    "zh": "碘海醇",
+    "variants": []
+  },
+  "moxifloxacin": {
+    "zh": "莫西沙星",
+    "variants": []
+  },
+  "voriconazole": {
+    "zh": "伏立康唑",
+    "variants": []
+  },
+  "nitroglycerin": {
+    "zh": "硝酸甘油",
+    "variants": []
+  },
+  "ampicillin": {
+    "zh": "氨苄西林",
+    "variants": []
+  },
+  "fluvoxamine": {
+    "zh": "氟伏沙明",
+    "variants": []
+  },
+  "atropine": {
+    "zh": "阿托品",
+    "variants": []
+  },
+  "dobutamine": {
+    "zh": "多巴酚丁胺",
+    "variants": []
+  },
+  "metronidazole": {
+    "zh": "甲硝唑",
+    "variants": []
+  },
+  "celecoxib": {
+    "zh": "塞来昔布",
+    "variants": []
+  },
+  "furosemide": {
+    "zh": "呋塞米",
+    "variants": []
+  },
+  "ketorolac": {
+    "zh": "酮咯酸",
+    "variants": []
+  },
+  "meropenem": {
+    "zh": "美罗培南",
+    "variants": []
+  },
+  "propofol": {
+    "zh": "丙泊酚",
+    "variants": []
+  },
+  "acarbose": {
+    "zh": "阿卡波糖",
+    "variants": []
+  },
+  "dabigatran": {
+    "zh": "达比加群",
+    "variants": []
+  },
+  "cisatracurium": {
+    "zh": "顺阿曲库铵",
+    "variants": []
+  },
+  "oxytocin": {
+    "zh": "缩宫素",
+    "variants": []
+  },
+  "bromhexine": {
+    "zh": "溴己新",
+    "variants": []
+  },
+  "linezolid": {
+    "zh": "利奈唑胺",
+    "variants": []
+  },
+  "nifedipine": {
+    "zh": "硝苯地平",
+    "variants": []
+  },
+  "bisoprolol": {
+    "zh": "比索洛尔",
+    "variants": []
+  },
+  "irbesartan": {
+    "zh": "厄贝沙坦",
+    "variants": []
+  },
+  "enoxaparin": {
+    "zh": "依诺肝素",
+    "variants": []
+  },
+  "etoricoxib": {
+    "zh": "依托考昔",
+    "variants": []
+  },
+  "afatinib": {
+    "zh": "阿法替尼",
+    "variants": []
+  },
+  "vildagliptin": {
+    "zh": "维格列汀",
+    "variants": []
+  },
+  "phenylephrine": {
+    "zh": "去氧肾上腺素",
+    "variants": []
+  },
+  "edoxaban": {
+    "zh": "艾多沙班",
+    "variants": []
+  },
+  "indapamide": {
+    "zh": "吲达帕胺",
+    "variants": []
+  },
+  "argatroban": {
+    "zh": "阿加曲班",
+    "variants": []
+  },
+  "adenosylcobalamin": {
+    "zh": "腺苷钴胺",
+    "variants": []
+  },
+  "milrinone": {
+    "zh": "米力农",
+    "variants": []
+  },
+  "calcitriol": {
+    "zh": "骨化三醇",
+    "variants": []
+  },
+  "calcium gluconate": {
+    "zh": "葡萄糖酸钙",
+    "variants": []
+  },
+  "esmolol": {
+    "zh": "艾司洛尔",
+    "variants": []
+  },
+  "bortezomib": {
+    "zh": "硼替佐米",
+    "variants": []
+  },
+  "ganciclovir": {
+    "zh": "更昔洛韦",
+    "variants": []
+  },
+  "lenalidomide": {
+    "zh": "来那度胺",
+    "variants": []
+  },
+  "tenofovir disoproxil": {
+    "zh": "替诺福韦二吡呋酯",
+    "variants": []
+  },
+  "valproic acid": {
+    "zh": "丙戊酸",
+    "variants": []
+  },
+  "rocuronium": {
+    "zh": "罗库溴铵",
+    "variants": []
+  },
+  "aztreonam": {
+    "zh": "氨曲南",
+    "variants": []
+  },
+  "olmesartan": {
+    "zh": "奥美沙坦",
+    "variants": []
+  },
+  "carbazochrome": {
+    "zh": "卡络磺",
+    "variants": []
+  },
+  "captopril": {
+    "zh": "卡托普利",
+    "variants": []
+  },
+  "isosorbide mononitrate": {
+    "zh": "单硝酸异山梨酯",
+    "variants": []
+  },
+  "alanyl glutamine": {
+    "zh": "丙氨酰谷氨酰胺",
+    "variants": []
+  },
+  "methocarbamol": {
+    "zh": "美索巴莫",
+    "variants": []
+  },
+  "iopamidol": {
+    "zh": "碘帕醇",
+    "variants": []
+  },
+  "iodixanol": {
+    "zh": "碘克沙醇",
+    "variants": []
+  },
+  "trazodone": {
+    "zh": "曲唑酮",
+    "variants": []
+  },
+  "venlafaxine": {
+    "zh": "文拉法辛",
+    "variants": []
+  },
+  "methotrexate": {
+    "zh": "甲氨蝶呤",
+    "variants": []
+  },
+  "cefotiam": {
+    "zh": "头孢替安",
+    "variants": []
+  },
+  "gemcitabine": {
+    "zh": "吉西他滨",
+    "variants": []
+  },
+  "posaconazole": {
+    "zh": "泊沙康唑",
+    "variants": []
+  },
+  "dexamethasone": {
+    "zh": "地塞米松",
+    "variants": []
+  },
+  "aspirin": {
+    "zh": "阿司匹林",
+    "variants": []
+  },
+  "benidipine": {
+    "zh": "贝尼地平",
+    "variants": []
+  },
+  "tirofiban": {
+    "zh": "替罗非班",
+    "variants": []
+  },
+  "lornoxicam": {
+    "zh": "氯诺昔康",
+    "variants": []
+  },
+  "latamoxef": {
+    "zh": "拉氧头孢",
+    "variants": []
+  },
+  "lansoprazole": {
+    "zh": "兰索拉唑",
+    "variants": []
+  },
+  "calcium chloride": {
+    "zh": "氯化钙",
+    "variants": []
+  },
+  "fluconazole": {
+    "zh": "氟康唑",
+    "variants": []
+  },
+  "cefprozil": {
+    "zh": "头孢丙烯",
+    "variants": []
+  },
+  "polidocanol": {
+    "zh": "聚多卡醇",
+    "variants": []
+  },
+  "atomoxetine": {
+    "zh": "托莫西汀",
+    "variants": []
+  },
+  "lenvatinib": {
+    "zh": "仑伐替尼",
+    "variants": []
+  },
+  "roxatidine": {
+    "zh": "罗沙替丁",
+    "variants": []
+  },
+  "methylprednisolone": {
+    "zh": "甲泼尼龙",
+    "variants": []
+  },
+  "aminophylline": {
+    "zh": "氨茶碱",
+    "variants": []
+  },
+  "flumazenil": {
+    "zh": "氟马西尼",
+    "variants": []
+  },
+  "gliclazide": {
+    "zh": "格列齐特",
+    "variants": []
+  },
+  "betamethasone": {
+    "zh": "倍他米松",
+    "variants": []
+  },
+  "alfacalcidol": {
+    "zh": "阿法骨化醇",
+    "variants": []
+  },
+  "norfloxacin": {
+    "zh": "诺氟沙星",
+    "variants": []
+  },
+  "lurasidone": {
+    "zh": "鲁拉西酮",
+    "variants": []
+  },
+  "temozolomide": {
+    "zh": "替莫唑胺",
+    "variants": []
+  },
+  "diclofenac": {
+    "zh": "双氯芬酸",
+    "variants": []
+  },
+  "chlorphenamine": {
+    "zh": "氯苯那敏",
+    "variants": []
+  },
+  "octreotide": {
+    "zh": "奥曲肽",
+    "variants": []
+  },
+  "alogliptin": {
+    "zh": "阿格列汀",
+    "variants": []
+  },
+  "oxycodone": {
+    "zh": "羟考酮",
+    "variants": []
+  },
+  "trimetazidine": {
+    "zh": "曲美他嗪",
+    "variants": []
+  },
+  "bupivacaine": {
+    "zh": "布比卡因",
+    "variants": []
+  },
+  "cefepime": {
+    "zh": "头孢吡肟",
+    "variants": []
+  },
+  "cefradine": {
+    "zh": "头孢拉定",
+    "variants": []
+  },
+  "indobufen": {
+    "zh": "吲哚布芬",
+    "variants": []
+  },
+  "morinidazole": {
+    "zh": "吗啉硝唑",
+    "variants": []
+  },
+  "avatrombopag": {
+    "zh": "阿伐曲泊帕",
+    "variants": []
+  },
+  "felodipine": {
+    "zh": "非洛地平",
+    "variants": []
+  },
+  "rabeprazole": {
+    "zh": "雷贝拉唑",
+    "variants": []
+  },
+  "aripiprazole": {
+    "zh": "阿立哌唑",
+    "variants": []
+  },
+  "metaraminol": {
+    "zh": "间羟胺",
+    "variants": []
+  },
+  "atosiban": {
+    "zh": "阿托西班",
+    "variants": []
+  },
+  "cimetidine": {
+    "zh": "西咪替丁",
+    "variants": []
+  },
+  "eldecalcitol": {
+    "zh": "艾地骨化醇",
+    "variants": []
+  },
+  "sevelamer": {
+    "zh": "司维拉姆",
+    "variants": []
+  },
+  "isosorbide dinitrate": {
+    "zh": "硝酸异山梨酯",
+    "variants": []
+  },
+  "ondansetron": {
+    "zh": "昂丹司琼",
+    "variants": []
+  },
+  "lamotrigine": {
+    "zh": "拉莫三嗪",
+    "variants": []
+  },
+  "macrogol": {
+    "zh": "聚乙二醇",
+    "variants": []
+  },
+  "epalrestat": {
+    "zh": "依帕司他",
+    "variants": []
+  },
+  "enalapril": {
+    "zh": "依那普利",
+    "variants": []
+  },
+  "aprepitant": {
+    "zh": "阿瑞匹坦",
+    "variants": []
+  },
+  "mirabegron": {
+    "zh": "米拉贝隆",
+    "variants": []
+  },
+  "ursodeoxycholic acid": {
+    "zh": "熊去氧胆酸",
+    "variants": []
+  },
+  "caspofungin": {
+    "zh": "卡泊芬净",
+    "variants": []
+  },
+  "fluorouracil": {
+    "zh": "氟尿嘧啶",
+    "variants": []
+  },
+  "perampanel": {
+    "zh": "吡仑帕奈",
+    "variants": []
+  },
+  "ibandronic acid": {
+    "zh": "伊班膦酸",
+    "variants": []
+  },
+  "gadoteric acid": {
+    "zh": "钆特酸",
+    "variants": []
+  },
+  "lanthanum carbonate": {
+    "zh": "碳酸镧",
+    "variants": []
+  },
+  "ioversol": {
+    "zh": "碘佛醇",
+    "variants": []
+  },
+  "epinephrine": {
+    "zh": "肾上腺素",
+    "variants": []
+  },
+  "erlotinib": {
+    "zh": "厄洛替尼",
+    "variants": []
+  },
+  "glipizide": {
+    "zh": "格列吡嗪",
+    "variants": []
+  },
+  "pravastatin": {
+    "zh": "普伐他汀",
+    "variants": []
+  },
+  "docetaxel": {
+    "zh": "多西他赛",
+    "variants": []
+  },
+  "ezetimibe": {
+    "zh": "依折麦布",
+    "variants": []
+  },
+  "nadroparin": {
+    "zh": "那屈肝素",
+    "variants": []
+  },
+  "salbutamol": {
+    "zh": "沙丁胺醇",
+    "variants": []
+  },
+  "prucalopride": {
+    "zh": "普芦卡必利",
+    "variants": []
+  },
+  "cytarabine": {
+    "zh": "阿糖胞苷",
+    "variants": []
+  },
+  "tedizolid": {
+    "zh": "特地唑胺",
+    "variants": []
+  },
+  "brexpiprazole": {
+    "zh": "布瑞哌唑",
+    "variants": []
+  },
+  "nicergoline": {
+    "zh": "尼麦角林",
+    "variants": []
+  },
+  "nimodipine": {
+    "zh": "尼莫地平",
+    "variants": []
+  },
+  "oxcarbazepine": {
+    "zh": "奥卡西平",
+    "variants": []
+  },
+  "canagliflozin": {
+    "zh": "卡格列净",
+    "variants": []
+  },
+  "pitavastatin": {
+    "zh": "匹伐他汀",
+    "variants": []
+  },
+  "icosapent ethyl": {
+    "zh": "二十碳五烯酸乙酯",
+    "variants": []
+  },
+  "mycophenolate": {
+    "zh": "麦考酚",
+    "variants": []
+  },
+  "beraprost": {
+    "zh": "贝前列素",
+    "variants": []
+  },
+  "calcium dobesilate": {
+    "zh": "羟苯磺酸钙",
+    "variants": []
+  },
+  "amiodarone": {
+    "zh": "胺碘酮",
+    "variants": []
+  },
+  "propranolol": {
+    "zh": "普萘洛尔",
+    "variants": []
+  },
+  "vardenafil": {
+    "zh": "伐地那非",
+    "variants": []
+  },
+  "irinotecan": {
+    "zh": "伊立替康",
+    "variants": []
+  },
+  "avibactam": {
+    "zh": "阿维巴坦",
+    "variants": []
+  },
+  "agomelatine": {
+    "zh": "阿戈美拉汀",
+    "variants": []
+  },
+  "iguratimod": {
+    "zh": "艾拉莫德",
+    "variants": []
+  },
+  "paclitaxel": {
+    "zh": "紫杉醇",
+    "variants": []
+  },
+  "lincomycin": {
+    "zh": "林可霉素",
+    "variants": []
+  },
+  "penehyclidine": {
+    "zh": "戊乙奎醚",
+    "variants": []
+  },
+  "imatinib": {
+    "zh": "伊马替尼",
+    "variants": []
+  },
+  "rebamipide": {
+    "zh": "瑞巴派特",
+    "variants": []
+  },
+  "somatostatin": {
+    "zh": "生长抑素",
+    "variants": []
+  },
+  "cefodizime": {
+    "zh": "头孢地嗪",
+    "variants": []
+  },
+  "glimepiride": {
+    "zh": "格列美脲",
+    "variants": []
+  },
+  "tandospirone": {
+    "zh": "坦度螺酮",
+    "variants": []
+  },
+  "olaparib": {
+    "zh": "奥拉帕利",
+    "variants": []
+  },
+  "perindopril": {
+    "zh": "培哚普利",
+    "variants": []
+  },
+  "pyrazinamide": {
+    "zh": "吡嗪酰胺",
+    "variants": []
+  },
+  "clarithromycin": {
+    "zh": "克拉霉素",
+    "variants": []
+  },
+  "voglibose": {
+    "zh": "伏格列波糖",
+    "variants": []
+  },
+  "nintedanib": {
+    "zh": "尼达尼布",
+    "variants": []
+  },
+  "gadopentetic acid": {
+    "zh": "钆喷酸",
+    "variants": []
+  },
+  "abiraterone": {
+    "zh": "阿比特龙",
+    "variants": []
+  },
+  "sunitinib": {
+    "zh": "舒尼替尼",
+    "variants": []
+  },
+  "iopromide": {
+    "zh": "碘普罗胺",
+    "variants": []
+  },
+  "tramadol": {
+    "zh": "曲马多",
+    "variants": []
+  },
+  "doxorubicin": {
+    "zh": "多柔比星",
+    "variants": []
+  },
+  "ciclosporin": {
+    "zh": "环孢素",
+    "variants": []
+  },
+  "lamivudine": {
+    "zh": "拉米夫定",
+    "variants": []
+  },
+  "paliperidone": {
+    "zh": "帕利哌酮",
+    "variants": []
+  },
+  "levodopa/benserazide": {
+    "zh": "多巴丝肼",
+    "variants": []
+  },
+  "digoxin": {
+    "zh": "地高辛",
+    "variants": []
+  },
+  "edaravone": {
+    "zh": "依达拉奉",
+    "variants": []
+  },
+  "progesterone": {
+    "zh": "黄体酮",
+    "variants": []
+  },
+  "mirtazapine": {
+    "zh": "米氮平",
+    "variants": []
+  },
+  "terbutaline": {
+    "zh": "特布他林",
+    "variants": []
+  },
+  "flunarizine": {
+    "zh": "氟桂利嗪",
+    "variants": []
+  },
+  "paroxetine": {
+    "zh": "帕罗西汀",
+    "variants": []
+  },
+  "thymalfasin": {
+    "zh": "胸腺法新",
+    "variants": []
+  },
+  "bendamustine": {
+    "zh": "苯达莫司汀",
+    "variants": []
+  },
+  "tigecycline": {
+    "zh": "替加环素",
+    "variants": []
+  },
+  "decitabine": {
+    "zh": "地西他滨",
+    "variants": []
+  },
+  "zoledronic acid": {
+    "zh": "唑来膦酸",
+    "variants": []
+  },
+  "amisulpride": {
+    "zh": "氨磺必利",
+    "variants": []
+  },
+  "letrozole": {
+    "zh": "来曲唑",
+    "variants": []
+  },
+  "enzalutamide": {
+    "zh": "恩扎卢胺",
+    "variants": []
+  },
+  "deferasirox": {
+    "zh": "地拉罗司",
+    "variants": []
+  },
+  "linagliptin": {
+    "zh": "利格列汀",
+    "variants": []
+  },
+  "fenofibrate": {
+    "zh": "非诺贝特",
+    "variants": []
+  },
+  "potassium aspartate": {
+    "zh": "门冬氨酸钾",
+    "variants": []
+  },
+  "gadobutrol": {
+    "zh": "钆布醇",
+    "variants": []
+  },
+  "dasatinib": {
+    "zh": "达沙替尼",
+    "variants": []
+  },
+  "adenosine": {
+    "zh": "腺苷",
+    "variants": []
+  },
+  "hydroxychloroquine": {
+    "zh": "羟氯喹",
+    "variants": []
+  },
+  "cinacalcet": {
+    "zh": "西那卡塞",
+    "variants": []
+  },
+  "drotaverine": {
+    "zh": "屈他维林",
+    "variants": []
+  },
+  "olopatadine": {
+    "zh": "奥洛他定",
+    "variants": []
+  },
+  "olprinone": {
+    "zh": "奥普力农",
+    "variants": []
+  },
+  "repaglinide": {
+    "zh": "瑞格列奈",
+    "variants": []
+  },
+  "teicoplanin": {
+    "zh": "替考拉宁",
+    "variants": []
+  },
+  "saxagliptin": {
+    "zh": "沙格列汀",
+    "variants": []
+  },
+  "gefitinib": {
+    "zh": "吉非替尼",
+    "variants": []
+  },
+  "desmopressin": {
+    "zh": "去氨加压素",
+    "variants": []
+  },
+  "carboprost": {
+    "zh": "卡前列素",
+    "variants": []
+  },
+  "risperidone": {
+    "zh": "利培酮",
+    "variants": []
+  },
+  "alendronic acid": {
+    "zh": "阿仑膦酸",
+    "variants": []
+  },
+  "eltrombopag": {
+    "zh": "艾曲泊帕",
+    "variants": []
+  },
+  "mivacurium": {
+    "zh": "米库氯铵",
+    "variants": []
+  },
+  "fasudil": {
+    "zh": "法舒地尔",
+    "variants": []
+  },
+  "granisetron": {
+    "zh": "格拉司琼",
+    "variants": []
+  },
+  "labetalol": {
+    "zh": "拉贝洛尔",
+    "variants": []
+  },
+  "levocetirizine": {
+    "zh": "左西替利嗪",
+    "variants": []
+  },
+  "pioglitazone": {
+    "zh": "吡格列酮",
+    "variants": []
+  },
+  "ivabradine": {
+    "zh": "伊伐布雷定",
+    "variants": []
+  },
+  "cetrorelix": {
+    "zh": "西曲瑞克",
+    "variants": []
+  },
+  "vecuronium": {
+    "zh": "维库溴铵",
+    "variants": []
+  },
+  "micafungin": {
+    "zh": "米卡芬净",
+    "variants": []
+  },
+  "terlipressin": {
+    "zh": "特利加压素",
+    "variants": []
+  },
+  "ademetionine": {
+    "zh": "腺苷蛋氨酸",
+    "variants": []
+  },
+  "clozapine": {
+    "zh": "氯氮平",
+    "variants": []
+  },
+  "sulfamethoxazole": {
+    "zh": "磺胺甲噁唑",
+    "variants": []
+  },
+  "midazolam": {
+    "zh": "咪达唑仑",
+    "variants": []
+  },
+  "acipimox": {
+    "zh": "阿昔莫司",
+    "variants": []
+  },
+  "lactated ringer's": {
+    "zh": "乳酸钠林格",
+    "variants": []
+  },
+  "sodium acetate ringer's": {
+    "zh": "醋酸钠林格",
+    "variants": []
+  },
+  "glycerol fructose": {
+    "zh": "甘油果糖",
+    "variants": []
+  }
 }
