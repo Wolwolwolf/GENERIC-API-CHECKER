@@ -65,18 +65,25 @@
       backdrop-filter: blur(var(--kimi-glass-blur)); -webkit-backdrop-filter: blur(var(--kimi-glass-blur));
     }
   }
-  .search-row { display: flex; gap: 10px; }
+  .search-row {
+    display: flex; gap: 10px; align-items: center;
+    border: 2px solid var(--kimi-color-accent, #2f6fed);
+    border-radius: 14px; padding: 6px 8px;
+    background: var(--kimi-color-surface, #ffffff);
+    box-shadow: 0 6px 20px rgba(47, 111, 237, 0.16);
+    transition: box-shadow 160ms ease, border-color 160ms ease;
+  }
+  .search-row:focus-within {
+    box-shadow: 0 8px 26px rgba(47, 111, 237, 0.28);
+  }
   .search-box { position: relative; flex: 1; min-inline-size: 0; display: flex; align-items: center; }
   .search-box svg { position: absolute; inset-inline-start: 12px; opacity: .55; pointer-events: none; }
   .search-box input {
     width: 100%; font: inherit; letter-spacing: 0;
-    padding: 11px 14px 11px 38px; border-radius: 12px;
-    border: 1.5px solid var(--kimi-color-border);
-    background: var(--kimi-color-surface); color: var(--kimi-color-text-primary);
-    transition: border-color 160ms ease, box-shadow 160ms ease;
+    padding: 9px 12px 9px 38px; border-radius: 10px;
+    border: none; background: transparent; color: var(--kimi-color-text-primary, #24292f);
   }
-  .search-box input:focus { outline: none; border-color: var(--kimi-color-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--kimi-color-accent, #2f6fed) 18%, transparent); }
+  .search-box input:focus { outline: none; }
   .cta {
     font: inherit; font-weight: 600; cursor: pointer; padding: 10px 22px;
     border: none; border-radius: 12px; color: #fff;
