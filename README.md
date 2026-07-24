@@ -18,8 +18,9 @@
 |------|------|------|
 | 美国 | FDA | openFDA / Drugs@FDA |
 | 欧盟 | 欧盟委员会 | Union Register of medicinal products |
+| 中国 | NMPA / CDE | 化学药品目录集（中国上市药品目录集） |
 
-其他市场（中国 NMPA、英国 MHRA、瑞士 Swissmedic、日本 PMDA、俄罗斯、东盟等）数据可通过 `imports/<CODE>.csv` 手工导入扩展。
+其他市场（英国 MHRA、瑞士 Swissmedic、日本 PMDA、俄罗斯、东盟等）数据可通过 `imports/<CODE>.csv` 手工导入扩展。
 
 ## 本地运行
 
