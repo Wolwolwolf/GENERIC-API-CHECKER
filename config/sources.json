@@ -146,6 +146,15 @@
       "note": "文莱药品控制局（药学服务司）"
     },
     {
+      "code": "CDSCO",
+      "country": "印度",
+      "authority": "CDSCO / DCGI",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://cdscomdonline.gov.in/",
+      "note": "印度中央药品标准控制组织（DCGI 主管）；官网无公开批量产品注册库（仅新药批件清单），请手工整理 CSV 放入 imports/ 后运行 import_cdsco.py"
+    },
+    {
       "code": "ROSZDRAV",
       "country": "俄罗斯",
       "authority": "Minzdrav / Roszdravnadzor",
