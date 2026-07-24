@@ -65,6 +65,19 @@
       backdrop-filter: blur(var(--kimi-glass-blur)); -webkit-backdrop-filter: blur(var(--kimi-glass-blur));
     }
   }
+  .tabs { display: flex; gap: 6px; margin-block-end: 10px; }
+  .tab {
+    font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    padding: 5px 16px; border-radius: 999px;
+    border: 1.5px solid var(--kimi-color-border, #d0d7de);
+    background: transparent; color: var(--kimi-color-text-secondary, #57606a);
+    transition: all 140ms ease;
+  }
+  .tab:hover { border-color: var(--kimi-color-accent, #2f6fed); color: var(--kimi-color-accent, #2f6fed); }
+  .tab.active {
+    background: linear-gradient(135deg, var(--kimi-color-accent, #2f6fed), #7c5cff);
+    border-color: transparent; color: #fff;
+  }
   .search-row {
     display: flex; gap: 10px; align-items: center;
     border: 2px solid var(--kimi-color-accent, #2f6fed);
@@ -204,6 +217,10 @@
   <section class="stage" data-kimi-priority="p0" aria-label="API 查询">
     <div id="pix" aria-hidden="true"></div>
     <div class="panel kimi-glass kimi-glass-panel">
+      <div class="tabs" role="tablist" aria-label="检索方式">
+        <button class="tab active" data-mode="api" type="button" role="tab">按 API 检索</button>
+        <button class="tab" data-mode="mfr" type="button" role="tab">按厂家检索</button>
+      </div>
       <form id="f" class="search-row">
         <div class="search-box">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
@@ -211,6 +228,7 @@
                  placeholder="输入 API 中/英文名，如：阿托伐他汀 / atorvastatin"
                  aria-label="仿制药 API 名称（中文或英文）">
           <datalist id="api-list"></datalist>
+          <datalist id="mfr-list"></datalist>
         </div>
         <button class="cta" type="submit">查询</button>
       </form>
@@ -283,6 +301,22 @@ const DATA = __WIDGET_DATA__;
       zhTerms.some(t => t && p.aizh && p.aizh.includes(t)));
     rows.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     return { term: en || (enTerms[0] || ''), zh, rows };
+  }
+
+  /* ---------- 厂家检索 ---------- */
+  const normMfr = s => String(s || '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, '');
+  function searchMfr(q) {
+    const nq = normMfr(q);
+    if (!nq) return { rows: [], apps: [] };
+    const rows = DATA.products.filter(p => p.app && normMfr(p.app).includes(nq));
+    rows.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    const cnt = new Map();
+    for (const r of rows) {
+      const k = r.app.trim();
+      cnt.set(k, (cnt.get(k) || 0) + 1);
+    }
+    const apps = [...cnt.entries()].sort((a, b) => b[1] - a[1]);
+    return { rows, apps };
   }
 
   /* ---------- 区域与规则 ---------- */
@@ -429,11 +463,31 @@ const DATA = __WIDGET_DATA__;
   }
 
   function run(q) {
-    const { term, zh, rows } = search(q);
     const headline = $('#headline'), meta = $('#headmeta');
+    let rows, headlineText, metaText, emptyHint;
+    if (mode === 'mfr') {
+      const r = searchMfr(q);
+      rows = r.rows;
+      if (rows.length) {
+        const gc = new Set(rows.map(x => x.c)).size;
+        headlineText = `厂家「${q}」· 命中 ${r.apps.length} 个厂家主体 · ${gc} 个辖区 · 共 ${rows.length} 条`;
+        metaText = r.apps.slice(0, 4).map(([a, n]) => `${a}（${n} 条）`).join('；') +
+          (r.apps.length > 4 ? `；等共 ${r.apps.length} 个主体` : '');
+      }
+      emptyHint = `未检索到厂家「${q}」，可输入公司名关键词（中/英文均可），如：石药 / Teva / 正大天晴`;
+    } else {
+      const r = search(q);
+      rows = r.rows;
+      if (rows.length) {
+        const gc = new Set(rows.map(x => x.c)).size;
+        const disp = r.zh ? `${r.zh}${r.term && r.term !== r.zh ? ' / ' + r.term : ''}` : r.term;
+        headlineText = `${disp} · 已在 ${gc} 个辖区获批 · 共 ${rows.length} 条`;
+      }
+      emptyHint = `未在数据库中检索到「${q}」，可尝试英文通用名或去掉剂型后缀`;
+    }
     if (!rows.length) {
       headline.textContent = '未找到记录';
-      meta.textContent = `未在数据库中检索到「${q}」，可尝试英文通用名或去掉剂型后缀`;
+      meta.textContent = emptyHint;
       $('#results').hidden = true; $('#juris').hidden = true;
       return;
     }
@@ -443,9 +497,8 @@ const DATA = __WIDGET_DATA__;
       groups.get(r.c).push(r);
     }
     const sorted = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
-    const disp = zh ? `${zh}${term && term !== zh ? ' / ' + term : ''}` : term;
-    headline.textContent = `${disp} · 已在 ${sorted.length} 个辖区获批 · 共 ${rows.length} 条`;
-    meta.textContent = sorted.map(([c, rs]) => `${codeLabel(c)} ${rs.length}`).join(' ｜ ');
+    headline.textContent = headlineText;
+    meta.textContent = metaText || sorted.map(([c, rs]) => `${codeLabel(c)} ${rs.length}`).join(' ｜ ');
 
     renderJuris(sorted);
     renderGroups(sorted);
@@ -469,7 +522,39 @@ const DATA = __WIDGET_DATA__;
   }
 
   /* ---------- 初始化 ---------- */
-  $('#f').addEventListener('submit', e => { e.preventDefault(); const v = $('#q').value.trim(); if (v) run(v); });
+  let mode = 'api';
+  const EXAMPLES = {
+    api: ['阿托伐他汀', '二甲双胍', 'atorvastatin', 'metformin', '布洛芬'],
+    mfr: ['石药集团', 'Teva', '正大天晴', 'Epic Pharma', '华润'],
+  };
+  const PLACEHOLDERS = {
+    api: '输入 API 中/英文名，如：阿托伐他汀 / atorvastatin',
+    mfr: '输入厂家名称（中/英文），如：石药集团 / Teva',
+  };
+  const input = $('#q');
+  function setMode(m) {
+    mode = m;
+    document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
+    input.placeholder = PLACEHOLDERS[m];
+    input.setAttribute('list', m === 'api' ? 'api-list' : 'mfr-list');
+    const ex = $('#examples');
+    ex.querySelectorAll('.chip').forEach(c => c.remove());
+    for (const t of EXAMPLES[m]) {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.textContent = t;
+      b.addEventListener('click', () => { input.value = t; run(t); });
+      ex.appendChild(b);
+    }
+    $('#headline').innerHTML = '<span class="empty">' +
+      (m === 'api' ? '输入一个仿制药 API，查看它在哪些国家已获批，以及相同技术证明文件还能在哪些国家使用。'
+                   : '输入厂家名称，查看该厂家在哪些国家拥有已获批上市的仿制药。') + '</span>';
+    $('#headmeta').textContent = '';
+    $('#results').hidden = true; $('#juris').hidden = true;
+  }
+  document.querySelectorAll('.tab').forEach(b =>
+    b.addEventListener('click', () => setMode(b.dataset.mode)));
+
+  $('#f').addEventListener('submit', e => { e.preventDefault(); const v = input.value.trim(); if (v) run(v); });
 
   // 顶部统计
   const jurisCount = new Set(DATA.products.map(p => p.c)).size;
@@ -478,21 +563,17 @@ const DATA = __WIDGET_DATA__;
     `<span class="stat"><b>${jurisCount}</b>个辖区</span>` +
     `<span class="stat">快照 <b>${String(DATA.generated_at).slice(0, 10)}</b></span>`;
 
-  // 自动补全（中英文 API 名）
+  // 自动补全（API：中英文通用名；厂家：按记录数取高频厂家名）
   const names = new Set();
   for (const p of DATA.products) { if (p.api) names.add(p.api); if (p.aizh) names.add(p.aizh); }
   for (const [en, info] of Object.entries(DATA.aliases)) { names.add(en); if (info.zh) names.add(info.zh); }
   $('#api-list').innerHTML = [...names].sort().slice(0, 4000).map(n => `<option value="${esc(n)}">`).join('');
+  const mfrCnt = new Map();
+  for (const p of DATA.products) { if (p.app) { const k = p.app.trim(); mfrCnt.set(k, (mfrCnt.get(k) || 0) + 1); } }
+  $('#mfr-list').innerHTML = [...mfrCnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3000)
+    .map(([n]) => `<option value="${esc(n)}">`).join('');
 
-  // 示例 chips
-  const examples = ['阿托伐他汀', '二甲双胍', 'atorvastatin', 'metformin', '布洛芬'];
-  const ex = $('#examples');
-  for (const t of examples) {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'chip'; b.textContent = t;
-    b.addEventListener('click', () => { $('#q').value = t; run(t); });
-    ex.appendChild(b);
-  }
+  setMode('api');
 
   $('#foot').innerHTML =
     `数据快照：${DATA.generated_at}（${DATA.products.length.toLocaleString()} 条）<br>` +
