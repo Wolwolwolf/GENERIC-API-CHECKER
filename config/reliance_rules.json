@@ -1,0 +1,117 @@
+{
+  "_comment": "仿制药技术证明文件互认/依赖规则库。基于本研究报告第五章事实编制：from=出具证明文件的监管机构；usable_in=可凭该文件使用的目标经济体；doc_type=互认的文件类型；scope=互认性质。注意：除 EU-MRP/DCP 与 ASEAN BE-MRA 外，均不构成对疗效结论本身的自动互认。",
+  "rules": [
+    {
+      "id": "EU-MRP-DCP",
+      "from": ["EU", "EU_MEMBER"],
+      "usable_in": ["EU"],
+      "doc_type": "上市许可审评结论（含 BE 结论）",
+      "scope": "疗效结论互认（制度化）",
+      "note": "经互认程序 MRP 或非集中程序 DCP 在一个成员国（RMS）获批的仿制药，其余成员国（CMS）原则上 90 天内相互承认，实现一次 BE、全欧互认。"
+    },
+    {
+      "id": "EU-US-MRA",
+      "from": ["EU", "FDA"],
+      "usable_in": ["FDA", "EU"],
+      "doc_type": "GMP 检查报告",
+      "scope": "检查互认（不含疗效结论）",
+      "note": "2017 年生效、2019 年覆盖全部欧盟成员国；2025 年 10 月起欧盟可自愿依赖 FDA 在美境外的检查。上市许可仍需各自审批。"
+    },
+    {
+      "id": "US-UK-MRA",
+      "from": ["FDA", "MHRA"],
+      "usable_in": ["FDA", "MHRA"],
+      "doc_type": "GMP 检查报告",
+      "scope": "检查互认",
+      "note": "美英 GMP 互认协议。"
+    },
+    {
+      "id": "US-CH-MRA",
+      "from": ["FDA", "SWISSMEDIC"],
+      "usable_in": ["FDA", "SWISSMEDIC"],
+      "doc_type": "GMP 检查报告",
+      "scope": "检查互认",
+      "note": "美国-瑞士 MRA，2023 年生效。"
+    },
+    {
+      "id": "EU-BILATERAL-MRA",
+      "from": ["EU"],
+      "usable_in": ["MHRA", "SWISSMEDIC", "HEALTHCANADA", "PMDA", "TGA"],
+      "doc_type": "GMP 检查报告",
+      "scope": "检查互认",
+      "note": "欧盟与英国、瑞士、加拿大（CETA）、日本、澳大利亚、新西兰均有 GMP 互认安排。"
+    },
+    {
+      "id": "ASEAN-GMP-MRA",
+      "from": ["HSA", "NPRA", "BPOM", "THAIFDA", "DAV", "PFDA", "DFDA", "DDF", "FDD", "BDMCA"],
+      "usable_in": ["HSA", "NPRA", "BPOM", "THAIFDA", "DAV", "PFDA", "DFDA", "DDF", "FDD", "BDMCA"],
+      "doc_type": "GMP 检查报告",
+      "scope": "检查互认（强制性）",
+      "note": "东盟药品生产企业 GMP 检查部门互认安排：成员国须承认列入清单的东盟检查机构出具的报告，避免重复检查。"
+    },
+    {
+      "id": "ASEAN-BE-MRA",
+      "from": ["HSA", "NPRA", "BPOM", "THAIFDA", "DAV", "PFDA", "DFDA", "DDF", "FDD", "BDMCA"],
+      "usable_in": ["HSA", "NPRA", "BPOM", "THAIFDA", "DAV", "PFDA", "DFDA", "DDF", "FDD", "BDMCA"],
+      "doc_type": "生物等效性（BE）研究报告",
+      "scope": "BE 结论互认（制度化）",
+      "note": "东盟仿制药 BE 研究报告互认安排：列入清单的东盟 BE 中心出具的 BE 报告获全部成员国承认，直接服务于仿制药注册。"
+    },
+    {
+      "id": "ASEAN-JA",
+      "from": ["HSA", "NPRA", "BPOM", "THAIFDA", "DAV", "PFDA", "DFDA", "DDF", "FDD", "BDMCA"],
+      "usable_in": ["HSA", "NPRA", "BPOM", "THAIFDA", "DAV", "PFDA", "DFDA", "DDF", "FDD", "BDMCA"],
+      "doc_type": "同一 ACTD 注册资料",
+      "scope": "联合评估（联合审评、各自发证）",
+      "note": "东盟联合评估程序：同一申请同步提交多国联合审评，可显著缩短多国上市时间，但批准权仍归各国。"
+    },
+    {
+      "id": "SRA-RELIANCE",
+      "from": ["FDA", "EU", "MHRA", "SWISSMEDIC", "PMDA", "HEALTHCANADA", "TGA"],
+      "usable_in": ["HSA", "NPRA", "TGA", "MHRA", "DDF", "FDD", "DFDA"],
+      "doc_type": "SRA 批准结论与审评报告",
+      "scope": "依赖/简略审评通道（非自动互认）",
+      "note": "新加坡 HSA、马来西亚 NPRA、澳大利亚 TGA、英国 IRP 等设有依赖路径，可凭 FDA/EMA 等严格监管机构（SRA）的批准大幅简化审评；柬埔寨、老挝、缅甸等亦普遍采信 SRA 批准与 CPP。"
+    },
+    {
+      "id": "WHO-PQ",
+      "from": ["WHO_PQ"],
+      "usable_in": ["DDF", "FDD", "DFDA", "DAV", "PFDA"],
+      "doc_type": "WHO 预认证结论",
+      "scope": "预认证采信",
+      "note": "WHO 预认证（含 BE 审评）被众多中低收入国家监管机构依赖采信，并供联合国机构采购。"
+    },
+    {
+      "id": "PICS-GMP",
+      "from": ["FDA", "EU", "MHRA", "SWISSMEDIC", "PMDA", "TGA", "HSA", "THAIFDA", "HEALTHCANADA"],
+      "usable_in": ["FDA", "EU", "MHRA", "SWISSMEDIC", "PMDA", "TGA", "HSA", "THAIFDA", "HEALTHCANADA"],
+      "doc_type": "PIC/S 成员 GMP 证书/检查信息",
+      "scope": "检查标准互认与信息共享",
+      "note": "PIC/S 成员间 GMP 检查标准统一、结果可相互参考，减少重复检查。中国 NMPA 正推进加入。"
+    },
+    {
+      "id": "CEP-EDQM",
+      "from": ["EDQM"],
+      "usable_in": ["EU", "SWISSMEDIC"],
+      "doc_type": "CEP（欧洲药典适用性证书）",
+      "scope": "原料药质量文件互认",
+      "note": "EDQM 颁发的 CEP 获《欧洲药典》全体签署方承认，可直接用于欧盟及瑞士的制剂注册申报。"
+    },
+    {
+      "id": "EAEU",
+      "from": ["ROSZDRAV"],
+      "usable_in": ["EAEU"],
+      "doc_type": "注册审评结论",
+      "scope": "区域统一注册",
+      "note": "欧亚经济联盟（俄罗斯、哈萨克斯坦、白俄罗斯、亚美尼亚、吉尔吉斯斯坦）内有统一药品注册路径。"
+    },
+    {
+      "id": "NMPA-ICH",
+      "from": ["NMPA"],
+      "usable_in": [],
+      "doc_type": "一致性评价结论",
+      "scope": "标准接轨（暂无疗效结论互认安排）",
+      "note": "中国仿制药一致性评价与 ICH 全面接轨，具备国际互认的技术前提，但目前尚无将一致性评价结论直接互认至境外的制度化安排。"
+    }
+  ]
+}

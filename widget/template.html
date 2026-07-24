@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>仿制药全球许可查询</title>
+<style>
+  :root { --daimon-widget-host-safe-inline-end: 190px; --daimon-widget-host-safe-block-start: 44px; }
+  .kimi-host-safe-context { container-type: inline-size; }
+  .kimi-host-safe-header {
+    box-sizing: border-box;
+    min-block-size: var(--daimon-widget-host-safe-block-start, 44px);
+    padding-inline-end: var(--daimon-widget-host-safe-inline-end, 190px);
+  }
+  @container (max-width: 419px) {
+    .kimi-host-safe-header { min-block-size: 0; padding-block-start: var(--daimon-widget-host-safe-block-start, 44px); padding-inline-end: 0; }
+  }
+  [data-kimi-root] { box-sizing: border-box; inline-size: 100%; min-inline-size: 0; max-inline-size: 100%; overflow: visible; }
+  [data-kimi-root] * { box-sizing: border-box; min-inline-size: 0; }
+  html[data-daimon-size-tier="compact"] [data-kimi-priority="p1"],
+  html[data-daimon-size-tier="compact"] [data-kimi-priority="p2"],
+  html[data-daimon-size-tier="compact"] [data-kimi-priority="p3"] { display: none !important; }
+
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--kimi-font-sans, system-ui, sans-serif);
+    color: var(--kimi-color-text-primary);
+    font-size: 13.5px; line-height: 1.55; letter-spacing: 0;
+  }
+  main { padding: 4px 2px 10px; }
+  code, .mono { font-family: var(--kimi-font-mono, ui-monospace, monospace); }
+
+  header h1 { font-size: 17px; font-weight: 600; margin: 0; }
+  header .sub { margin: 2px 0 0; font-size: 12px; color: var(--kimi-color-text-tertiary); }
+
+  /* 查询舞台：像素场 + Glass 控制面板 */
+  .stage { position: relative; isolation: isolate; margin-block-start: 8px; }
+  #pix { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: 8px;
+         color: var(--kimi-color-text-tertiary); pointer-events: none; }
+  .panel {
+    position: relative; z-index: 1;
+    border: 1px solid var(--kimi-color-border); border-radius: 8px;
+    background: var(--kimi-color-surface-raised); color: var(--kimi-color-text-primary);
+    padding: 12px; margin: 10px;
+  }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .panel {
+      border-color: var(--kimi-glass-border); background: var(--kimi-glass-surface);
+      box-shadow: 0 8px 32px var(--kimi-glass-shadow), inset 0 1px 0 var(--kimi-glass-highlight), inset 0 -1px 0 var(--kimi-glass-lowlight);
+      backdrop-filter: blur(var(--kimi-glass-blur)); -webkit-backdrop-filter: blur(var(--kimi-glass-blur));
+    }
+  }
+  .search-row { display: flex; gap: 8px; }
+  .search-row input {
+    flex: 1; min-inline-size: 0; font: inherit; letter-spacing: 0;
+    padding: 7px 10px; border-radius: 6px;
+    border: 1px solid var(--kimi-color-border);
+    background: var(--kimi-color-surface); color: var(--kimi-color-text-primary);
+  }
+  .search-row input:focus-visible { outline: 2px solid var(--kimi-color-accent); outline-offset: 1px; }
+  .gbtn {
+    min-height: 28px; font: inherit; cursor: pointer; padding: 6px 14px;
+    border: 1px solid var(--kimi-color-border); border-radius: 8px;
+    background: var(--kimi-color-surface-raised); color: var(--kimi-color-text-primary);
+    transition: background-color 140ms ease, border-color 140ms ease;
+  }
+  .gbtn:hover { border-color: var(--kimi-color-accent); background: var(--kimi-color-surface-strong); }
+  .gbtn:focus-visible { outline: 2px solid var(--kimi-color-accent); outline-offset: 2px; }
+  .p0-out { margin-block-start: 10px; }
+  .p0-out output { display: block; font-size: 15px; font-weight: 600; line-height: 1.3; }
+  .p0-out .meta { display: block; font-size: 12px; font-weight: 400; color: var(--kimi-color-text-secondary); margin-block-start: 2px; }
+  .p0-out .empty { font-weight: 400; font-size: 12.5px; color: var(--kimi-color-text-tertiary); }
+
+  /* 结果分组 */
+  #results { margin-block-start: 6px; }
+  .group { margin-block-start: 12px; }
+  .group > h2 {
+    font-size: 13.5px; font-weight: 600; margin: 0 0 6px;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .group > h2 .cnt { font-size: 12px; font-weight: 400; color: var(--kimi-color-text-tertiary); }
+  .rec {
+    display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 10px;
+    padding: 7px 0; border-block-start: 1px solid var(--kimi-color-border);
+  }
+  .rec .pn { font-weight: 500; overflow-wrap: anywhere; }
+  .rec .sub2 { grid-column: 1 / -1; font-size: 12px; color: var(--kimi-color-text-secondary); overflow-wrap: anywhere; }
+  .rec a { color: var(--kimi-color-accent); text-decoration: none; font-size: 12.5px; white-space: nowrap; }
+  .rec a:hover { text-decoration: underline; }
+  .more { font-size: 12px; color: var(--kimi-color-text-tertiary); padding-block-start: 4px; }
+
+  /* 互认地图 */
+  .map-wrap { margin-block-start: 16px; }
+  .map-wrap > h2, .hints > h2 { font-size: 13.5px; font-weight: 600; margin: 0 0 6px; }
+  #map { inline-size: 100%; block-size: auto; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 11.5px; color: var(--kimi-color-text-secondary); margin-block-start: 4px; }
+  .legend i { display: inline-block; inline-size: 10px; block-size: 10px; border-radius: 3px; margin-inline-end: 5px; }
+  .legend .lg-a i { background: var(--kimi-color-accent); }
+  .legend .lg-u i { border: 1.5px dashed var(--kimi-color-accent); }
+
+  .hints { margin-block-start: 14px; }
+  .hint { padding: 8px 0; border-block-start: 1px solid var(--kimi-color-border); }
+  .hint .h-t { font-weight: 600; font-size: 12.5px; }
+  .hint .h-t .scope { font-weight: 400; color: var(--kimi-color-text-secondary); }
+  .hint .h-d { font-size: 12px; color: var(--kimi-color-text-secondary); margin-block-start: 2px; }
+  .hint .h-u { font-size: 12px; margin-block-start: 2px; }
+  .hint .h-u b { font-weight: 600; }
+
+  footer { margin-block-start: 16px; padding-block-start: 8px; border-block-start: 1px solid var(--kimi-color-border);
+           font-size: 11.5px; color: var(--kimi-color-text-tertiary); }
+  @media (prefers-reduced-motion: reduce) { .gbtn { transition: none; } }
+</style>
+</head>
+<body>
+<main class="kimi-host-safe-context" data-kimi-root>
+  <header class="kimi-host-safe-header">
+    <h1>仿制药全球许可查询</h1>
+    <p class="sub">各国已获批同 API 药品目录 · 技术证明文件互认地图</p>
+  </header>
+
+  <section class="stage" data-kimi-priority="p0" aria-label="API 查询">
+    <div id="pix" aria-hidden="true"></div>
+    <div class="panel kimi-glass kimi-glass-panel">
+      <form id="f" class="search-row">
+        <input id="q" type="search" autocomplete="off"
+               placeholder="输入 API 中/英文名，如：阿托伐他汀 / atorvastatin"
+               aria-label="仿制药 API 名称（中文或英文）">
+        <button class="gbtn kimi-glass-button" type="submit">查询</button>
+      </form>
+      <div class="p0-out">
+        <output id="headline" aria-live="polite"></output>
+        <span id="headmeta" class="meta"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" hidden>
+    <div id="groups" data-kimi-priority="p1"></div>
+    <div class="map-wrap" data-kimi-priority="p2">
+      <h2>互认地图：相同技术证明文件可用范围</h2>
+      <svg id="map" viewBox="0 0 720 300" role="img" aria-label="技术证明文件互认示意图"></svg>
+      <div class="legend">
+        <span class="lg-a"><i></i>已获批该 API</span>
+        <span class="lg-u"><i></i>可凭相同技术文件使用</span>
+      </div>
+      <div id="hints" class="hints"></div>
+    </div>
+  </section>
+
+  <footer data-kimi-priority="p3" id="foot"></footer>
+</main>
+
+<script>
+const DATA = __WIDGET_DATA__;
+</script>
+<script>
+(function () {
+  'use strict';
+  /* ---------- 别名解析 ---------- */
+  const zh2en = {}, var2en = {};
+  for (const [en, info] of Object.entries(DATA.aliases)) {
+    zh2en[info.zh] = en;
+    (info.variants || []).forEach(v => { var2en[v.toLowerCase()] = en; });
+  }
+  function normalize(t) {
+    const s = t.trim();
+    const low = s.toLowerCase();
+    if (zh2en[s]) return { en: zh2en[s], zh: s };
+    if (DATA.aliases[low]) return { en: low, zh: DATA.aliases[low].zh };
+    if (var2en[low]) { const en = var2en[low]; return { en, zh: DATA.aliases[en].zh }; }
+    return { en: low, zh: null };
+  }
+
+  /* ---------- 检索 ---------- */
+  function search(q) {
+    const { en, zh } = normalize(q);
+    if (!en && !zh) return { term: en, zh, rows: [] };
+    const rows = DATA.products.filter(p =>
+      (en && p.api.includes(en)) || (zh && p.aizh && p.aizh.includes(zh)));
+    rows.sort((a, b) => {
+      const ea = a.api === en ? 0 : 1, eb = b.api === en ? 0 : 1;
+      return ea - eb || (b.date || '').localeCompare(a.date || '');
+    });
+    return { term: en, zh, rows };
+  }
+
+  /* ---------- 区域与规则 ---------- */
+  const ASEAN = ['HSA','NPRA','BPOM','THAIFDA','DAV','PFDA','DFDA','DDF','FDD','BDMCA'];
+  const NODES = {
+    FDA:        { x: 95,  y: 78,  t: '美国 FDA' },
+    EU:         { x: 290, y: 58,  t: '欧盟' },
+    MHRA:       { x: 290, y: 168, t: '英国 MHRA' },
+    SWISSMEDIC: { x: 430, y: 112, t: '瑞士' },
+    PMDA:       { x: 585, y: 58,  t: '日本 PMDA' },
+    NMPA:       { x: 585, y: 225, t: '中国 NMPA' },
+    ROSZDRAV:   { x: 95,  y: 225, t: '俄罗斯' },
+    ASEAN:      { x: 430, y: 240, t: '东盟十国' },
+  };
+  function regionOf(code) {
+    if (ASEAN.includes(code)) return 'ASEAN';
+    if (code === 'EU_MEMBER') return 'EU';
+    return NODES[code] ? code : null;
+  }
+  function matchRules(approvedCodes) {
+    const out = [];
+    for (const r of DATA.rules) {
+      const from = new Set(r.from.map(regionOf).filter(Boolean));
+      if ([...from].some(n => approvedCodes.has(n))) out.push(r);
+    }
+    return out;
+  }
+  function codeLabel(code) {
+    if (code === 'EAEU') return '欧亚经济联盟';
+    if (code === 'TGA') return '澳大利亚 TGA';
+    if (code === 'HEALTHCANADA') return '加拿大卫生部';
+    if (code === 'EDQM') return '欧洲药典签署方';
+    if (code === 'WHO_PQ') return 'WHO 预认证采信国';
+    const reg = regionOf(code);
+    if (reg && NODES[reg]) return NODES[reg].t;
+    const a = DATA.authorities[code];
+    return a ? a.country : code;
+  }
+
+  /* ---------- 渲染 ---------- */
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function renderGroups(groups) {
+    const box = $('#groups');
+    box.innerHTML = '';
+    for (const [code, rows] of groups) {
+      const a = DATA.authorities[code] || { country: code, authority: '' };
+      const g = document.createElement('div');
+      g.className = 'group';
+      const shown = rows.slice(0, 5);
+      g.innerHTML = `<h2>${esc(a.country)} — ${esc(a.authority)}<span class="cnt">${rows.length} 条</span></h2>` +
+        shown.map(r => `
+          <div class="rec">
+            <span class="pn">${esc(r.pn)}</span>
+            ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">许可链接 ↗</a>` : '<span></span>'}
+            <span class="sub2">${r.lic ? `批件号 <code class="mono">${esc(r.lic)}</code>` : ''}${r.date ? ` · 批准 ${esc(r.date)}` : ''}${r.app ? ` · ${esc(r.app)}` : ''}</span>
+          </div>`).join('') +
+        (rows.length > 5 ? `<div class="more">其余 ${rows.length - 5} 条未展开（可用 CLI 查询完整目录）</div>` : '');
+      box.appendChild(g);
+    }
+  }
+
+  function renderMap(approvedRegions, usableRegions, edges) {
+    const svg = $('#map');
+    const W = 86, H = 34;
+    let s = `<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="var(--kimi-color-text-tertiary)"/></marker></defs>`;
+    const drawn = new Set();
+    for (const e of edges) {
+      const key = e.from + '>' + e.to;
+      if (drawn.has(key) || e.from === e.to) continue;
+      drawn.add(key);
+      const a = NODES[e.from], b = NODES[e.to];
+      if (!a || !b) continue;
+      const x1 = a.x, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2;
+      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2 - 16;
+      s += `<path d="M${x1},${y1} Q${mx},${my} ${x2},${y2}" fill="none"
+        stroke="var(--kimi-color-text-tertiary)" stroke-width="1.2"
+        stroke-dasharray="4 3" marker-end="url(#ar)" opacity="0.75"/>
+        <text x="${mx}" y="${my + 3}" text-anchor="middle" font-size="9.5"
+        fill="var(--kimi-color-text-tertiary)">${esc(e.label)}</text>`;
+    }
+    for (const [code, n] of Object.entries(NODES)) {
+      const approved = approvedRegions.has(code);
+      const usable = !approved && usableRegions.has(code);
+      const fill = approved ? 'var(--kimi-color-accent)' : 'var(--kimi-color-surface-raised)';
+      const stroke = approved ? 'var(--kimi-color-accent)'
+        : usable ? 'var(--kimi-color-accent)' : 'var(--kimi-color-border)';
+      const dash = usable ? ' stroke-dasharray="5 3" stroke-width="1.8"' : '';
+      const tc = approved ? 'var(--kimi-color-on-accent)' : 'var(--kimi-color-text-primary)';
+      s += `<rect x="${n.x - W / 2}" y="${n.y}" width="${W}" height="${H}" rx="8"
+        fill="${fill}" stroke="${stroke}"${dash || ' stroke-width="1"'}/>
+        <text x="${n.x}" y="${n.y + H / 2 + 4}" text-anchor="middle" font-size="11.5"
+        font-weight="${approved ? 600 : 400}" fill="${tc}">${esc(n.t)}</text>`;
+    }
+    svg.innerHTML = s;
+  }
+
+  function renderHints(rules) {
+    const box = $('#hints');
+    box.innerHTML = '<h2>机制提示</h2>' + rules.map(r => `
+      <div class="hint">
+        <div class="h-t">${esc(r.id)} <span class="scope">· ${esc(r.scope)}</span></div>
+        <div class="h-d">${esc(r.doc_type)}</div>
+        <div class="h-u"><b>可使用于：</b>${r.usable_in.length ? r.usable_in.map(codeLabel).map(esc).join('；') : '（无自动互认目标，见说明）'}</div>
+        <div class="h-d">${esc(r.note)}</div>
+      </div>`).join('') +
+      `<div class="h-d" style="margin-block-start:6px">除「疗效结论互认（制度化）」外，其余机制不替代目标国注册程序。</div>`;
+  }
+
+  function run(q) {
+    const { term, zh, rows } = search(q);
+    const headline = $('#headline'), meta = $('#headmeta');
+    if (!rows.length) {
+      headline.textContent = '未找到记录';
+      meta.textContent = `未在快照中检索到「${q}」，可尝试英文通用名，或先更新数据库`;
+      $('#results').hidden = true;
+      return;
+    }
+    const groups = new Map();
+    for (const r of rows) {
+      if (!groups.has(r.c)) groups.set(r.c, []);
+      groups.get(r.c).push(r);
+    }
+    const sorted = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
+    const disp = zh ? `${zh} / ${term}` : term;
+    headline.textContent = `${disp} · 已在 ${sorted.length} 个辖区获批 · 共 ${rows.length} 条`;
+    meta.textContent = sorted.map(([c, rs]) => `${codeLabel(c)} ${rs.length}`).join(' ｜ ');
+
+    renderGroups(sorted);
+
+    const approvedRegions = new Set(sorted.map(([c]) => regionOf(c)).filter(Boolean));
+    const rules = matchRules(approvedRegions);
+    const usable = new Set(), edges = [];
+    for (const r of rules) {
+      const fromN = new Set(r.from.map(regionOf).filter(Boolean));
+      const toN = new Set(r.usable_in.map(regionOf).filter(Boolean));
+      for (const f of fromN) {
+        if (!approvedRegions.has(f)) continue;
+        for (const t of toN) {
+          if (t !== f) { usable.add(t); edges.push({ from: f, to: t, label: r.id }); }
+        }
+      }
+    }
+    renderMap(approvedRegions, usable, edges.slice(0, 12));
+    renderHints(rules);
+    $('#results').hidden = false;
+  }
+
+  $('#f').addEventListener('submit', e => { e.preventDefault(); const v = $('#q').value.trim(); if (v) run(v); });
+
+  const foot = $('#foot');
+  foot.textContent = `数据快照：${DATA.generated_at}（${DATA.products.length} 条）｜来源：美国 FDA Drugs@FDA、欧盟 Union Register 等官方站点 ｜ 限于快照收录范围，未收录辖区不代表无获批产品`;
+
+  /* 初始提示 */
+  $('#headline').innerHTML = '<span class="empty">输入一个仿制药 API，查看它在哪些国家已获批，以及相同技术证明文件还能在哪些国家使用。</span>';
+})();
+</script>
+<script>
+/* KimiPixelField（widgetdesign 资产内联）：空状态/头部的"全球流向"氛围场 */
+(function (global) {
+  'use strict';
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function seeded(seed) { let s = (Number(seed) || 1) >>> 0; return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+  function densityAt(mode, x, y, config) {
+    if (mode === 'directional') {
+      const angle = (Number(config.flowAngleDeg) || 0) * Math.PI / 180;
+      const dx = x - 0.5, dy = y - 0.5;
+      const along = dx * Math.cos(angle) + dy * Math.sin(angle);
+      const across = -dx * Math.sin(angle) + dy * Math.cos(angle);
+      const lane = 1 - Math.abs(across) * 4.4;
+      return clamp(lane * 0.72 + (along + 0.7) * 0.2, 0, 1);
+    }
+    return clamp(0.12 + x * 0.88, 0, 1);
+  }
+  function mount(container, options) {
+    const config = Object.assign({ mode: 'directional', mark: 'ascii', seed: 7, spacing: 14, opacity: 0.4,
+      pointer: true, pointerTarget: null, pointerRadius: 96, pointerStrength: 12, flowAngleDeg: 12,
+      driftSpeed: 0, variance: 0.34, tier: 'regular', characters: '.:+*#' }, options || {});
+    const pointerTarget = config.pointerTarget || container;
+    const media = typeof global.matchMedia === 'function' ? global.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+    const reduced = config.tier === 'compact' || media.matches;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.setAttribute('aria-hidden', 'true');
+    Object.assign(canvas.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', zIndex: '0' });
+    container.appendChild(canvas);
+    let marks = [], pointer = null, frame = 0, destroyed = false;
+    function dims() { const r = container.getBoundingClientRect(); return { w: Math.max(1, r.width), h: Math.max(1, r.height) }; }
+    function rebuild() {
+      const { w, h } = dims();
+      const ratio = Math.min(global.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(w * ratio); canvas.height = Math.round(h * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const gap = Math.max(8, config.spacing);
+      const random = seeded(config.seed);
+      const next = [];
+      for (let y = gap / 2; y < h; y += gap) for (let x = gap / 2; x < w; x += gap) {
+        const d = densityAt(config.mode, x / w, y / h, config);
+        if (random() > d * 0.84) continue;
+        next.push({ x: x + (random() - 0.5) * gap * config.variance, y: y + (random() - 0.5) * gap * config.variance, d });
+      }
+      marks = next; draw();
+    }
+    function draw() {
+      if (destroyed) return;
+      const { w, h } = dims();
+      ctx.clearRect(0, 0, w, h);
+      const color = global.getComputedStyle(container).color;
+      ctx.fillStyle = color;
+      for (const m of marks) {
+        let x = m.x, y = m.y;
+        if (pointer && !reduced) {
+          const dx = x - pointer.x, dy = y - pointer.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          if (dist < config.pointerRadius) {
+            const f = (1 - dist / config.pointerRadius) * config.pointerStrength;
+            x += dx / dist * f; y += dy / dist * f;
+          }
+        }
+        ctx.globalAlpha = clamp(config.opacity * (0.34 + m.d * 0.66), 0.04, 0.7);
+        const chars = config.characters;
+        ctx.font = `${Math.round(7 + m.d * 4)}px var(--kimi-font-mono, monospace)`;
+        ctx.fillText(chars[Math.min(chars.length - 1, Math.floor(m.d * chars.length))], x, y);
+      }
+      ctx.globalAlpha = 1;
+    }
+    function requestDraw() { if (!frame) frame = requestAnimationFrame(() => { frame = 0; draw(); }); }
+    pointerTarget.addEventListener('pointermove', e => {
+      if (!config.pointer || reduced) return;
+      const r = container.getBoundingClientRect();
+      pointer = { x: e.clientX - r.left, y: e.clientY - r.top };
+      requestDraw();
+    }, { passive: true });
+    pointerTarget.addEventListener('pointerleave', () => { pointer = null; draw(); }, { passive: true });
+    if (global.ResizeObserver) new ResizeObserver(rebuild).observe(container);
+    rebuild();
+    return { destroy() { destroyed = true; if (frame) cancelAnimationFrame(frame); canvas.remove(); } };
+  }
+  global.KimiPixelField = { mount };
+})(window);
+
+KimiPixelField.mount(document.getElementById('pix'), {
+  mode: 'directional', flowAngleDeg: 12, mark: 'ascii', characters: '.:+*#',
+  pointer: true, pointerTarget: document.querySelector('.stage'), seed: 11,
+});
+</script>
+</body>
+</html>

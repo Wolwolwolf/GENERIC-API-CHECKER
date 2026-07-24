@@ -1,0 +1,2 @@
+product_name,api_en,api_zh,applicant,approval_date,license_number,url
+示例：药品商品名,英文通用名（必填）,中文名（可空，自动查别名库）,持证商,YYYY-MM-DD,批准文号,许可链接

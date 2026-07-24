@@ -1,0 +1,158 @@
+{
+  "authorities": [
+    {
+      "code": "FDA",
+      "country": "美国",
+      "authority": "US FDA (CDER/OGD)",
+      "adapter": "fda",
+      "enabled": true,
+      "official_url": "https://www.accessdata.fda.gov/scripts/cder/daf/",
+      "note": "Drugs@FDA / openFDA API，实时可用"
+    },
+    {
+      "code": "EU",
+      "country": "欧盟",
+      "authority": "European Commission / EMA（Union Register）",
+      "adapter": "ema",
+      "enabled": true,
+      "xlsx_url": "https://ec.europa.eu/health/documents/community-register/html/reg_hum_act.htm",
+      "official_url": "https://ec.europa.eu/health/documents/community-register/html/",
+      "note": "欧盟共同体注册簿（集中程序产品）；成员国 MRP/DCP 产品请走各国 NCA 或 CMDh 的 MRI 数据库手工导入"
+    },
+    {
+      "code": "MHRA",
+      "country": "英国",
+      "authority": "MHRA",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://products.mhra.gov.uk/",
+      "note": "MHRA Products 网站无公开批量 API，请导出检索结果 CSV 放入 imports/ 目录"
+    },
+    {
+      "code": "SWISSMEDIC",
+      "country": "瑞士",
+      "authority": "Swissmedic",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://www.swissmedicinfo.ch/",
+      "note": "Swissmedic 药品信息系统，手工导出后导入"
+    },
+    {
+      "code": "PMDA",
+      "country": "日本",
+      "authority": "PMDA / 厚生劳动省",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/",
+      "note": "PMDA 医药品情报检索，手工导出后导入"
+    },
+    {
+      "code": "NMPA",
+      "country": "中国",
+      "authority": "NMPA / CDE",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://www.nmpa.gov.cn/datasearch/home-index.html",
+      "note": "NMPA 药品查询数据库 / CDE 上市药品目录集，手工导出后导入"
+    },
+    {
+      "code": "HSA",
+      "country": "新加坡",
+      "authority": "HSA",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://www.hsa.gov.sg/e-services/infosearch",
+      "note": "HSA Infosearch 注册药品检索"
+    },
+    {
+      "code": "NPRA",
+      "country": "马来西亚",
+      "authority": "NPRA / DCA",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://www.npra.gov.my/index.php/en/consumers/information-for-consumers/registered-products-search.html",
+      "note": "NPRA 注册产品检索（QUEST 系统）"
+    },
+    {
+      "code": "BPOM",
+      "country": "印度尼西亚",
+      "authority": "BPOM (NA-DFC)",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://cekbpom.pom.go.id/",
+      "note": "Cek BPOM 注册产品检索"
+    },
+    {
+      "code": "THAIFDA",
+      "country": "泰国",
+      "authority": "Thai FDA",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://www.fda.moph.go.th/",
+      "note": "泰国 FDA 药品注册检索"
+    },
+    {
+      "code": "DAV",
+      "country": "越南",
+      "authority": "DAV（卫生部药品管理局）",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://dav.gov.vn/",
+      "note": "DAV 注册药品公示"
+    },
+    {
+      "code": "PFDA",
+      "country": "菲律宾",
+      "authority": "Philippines FDA",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://verification.fda.gov.ph/",
+      "note": "菲律宾 FDA 产品注册核验系统"
+    },
+    {
+      "code": "DFDA",
+      "country": "缅甸",
+      "authority": "Myanmar DFDA",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "http://www.mohs.gov.mm/",
+      "note": "缅甸 DFDA（卫生部）"
+    },
+    {
+      "code": "DDF",
+      "country": "柬埔寨",
+      "authority": "Cambodia DDF",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "http://www.ddfcambodia.com/",
+      "note": "柬埔寨药品和食品司"
+    },
+    {
+      "code": "FDD",
+      "country": "老挝",
+      "authority": "Laos FDD",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "http://www.moh.gov.la/",
+      "note": "老挝食品和药品司"
+    },
+    {
+      "code": "BDMCA",
+      "country": "文莱",
+      "authority": "BDMCA / DPS",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://moh.gov.bn/services/pharmary-services/",
+      "note": "文莱药品控制局（药学服务司）"
+    },
+    {
+      "code": "ROSZDRAV",
+      "country": "俄罗斯",
+      "authority": "Minzdrav / Roszdravnadzor",
+      "adapter": "csv",
+      "enabled": false,
+      "official_url": "https://grls.rosminzdrav.ru/",
+      "note": "俄罗斯国家药品注册簿（GRLS）"
+    }
+  ]
+}
