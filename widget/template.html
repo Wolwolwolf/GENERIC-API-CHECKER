@@ -35,7 +35,7 @@
   .hero h1 {
     font-size: 22px; font-weight: 700; margin: 0; letter-spacing: .2px;
     background: linear-gradient(92deg, var(--kimi-color-accent, #2f6fed), #7c5cff 70%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
+    -webkit-background-clip: text; -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .hero .sub { margin: 4px 0 0; font-size: 12.5px; color: var(--kimi-color-text-tertiary); }
   .stats { display: flex; flex-wrap: wrap; gap: 8px; margin-block-start: 10px; }
@@ -61,7 +61,7 @@
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .panel {
       border-color: var(--kimi-glass-border); background: var(--kimi-glass-surface);
-      box-shadow: 0 12px 40px var(--kimi-glass-shadow), inset 0 1px 0 var(--kimi-glass-highlight), inset 0 -1px 0 var(--kimi-glass-lowlight);
+      box-shadow: 0 12px 40px var(--kimi-glass-shadow), inset 0 1px 0 var(--kimi-glass-highlight), inset 0 1px 0 var(--kimi-glass-lowlight);
       backdrop-filter: blur(var(--kimi-glass-blur)); -webkit-backdrop-filter: blur(var(--kimi-glass-blur));
     }
   }
@@ -84,7 +84,7 @@
     border-radius: 14px; padding: 6px 8px;
     background: var(--kimi-color-surface, #ffffff);
     box-shadow: 0 6px 20px rgba(47, 111, 237, 0.16);
-    transition: box-shadow 160ms ease, border-color 160ms ease;
+    transition: box-shadow 140ms ease, border-color 140ms ease;
   }
   .search-row:focus-within {
     box-shadow: 0 8px 26px rgba(47, 111, 237, 0.28);
@@ -94,7 +94,7 @@
   .search-box input {
     width: 100%; font: inherit; letter-spacing: 0;
     padding: 9px 12px 9px 38px; border-radius: 10px;
-    border: none; background: transparent; color: var(--kimi-color-text-primary, #24292f);
+    border: none; background: var(--kimi-color-surface, #ffffff); color: var(--kimi-color-text-primary, #24292f);
   }
   .search-box input:focus { outline: none; }
   .cta {
@@ -102,7 +102,7 @@
     border: none; border-radius: 12px; color: #fff;
     background: linear-gradient(135deg, var(--kimi-color-accent, #2f6fed), #7c5cff);
     box-shadow: 0 4px 14px color-mix(in srgb, var(--kimi-color-accent, #2f6fed) 35%, transparent);
-    transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+    transition: transform 140ms ease, filter 140ms ease;
   }
   .cta:hover { filter: brightness(1.07); transform: translateY(-1px); }
   .cta:active { transform: translateY(0); }
@@ -144,7 +144,7 @@
   .group > header {
     display: flex; align-items: center; gap: 10px; padding: 12px 16px;
     border-inline-start: 4px solid var(--kimi-color-accent);
-    background: color-mix(in srgb, var(--kimi-color-accent, #2f6fed) 5%, transparent);
+    background: color-mix(in srgb, var(--kimi-color-accent) 5%, transparent);
   }
   .group > header .flag { font-size: 20px; }
   .group > header .tt { flex: 1; min-inline-size: 0; }
@@ -158,7 +158,7 @@
     display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 12px;
     padding: 10px 16px; border-block-start: 1px solid var(--kimi-color-border);
   }
-  .rec:hover { background: color-mix(in srgb, var(--kimi-color-accent, #2f6fed) 4%, transparent); }
+  .rec:hover { background: color-mix(in srgb, var(--kimi-color-accent) 4%, transparent); }
   .rec .pn { font-weight: 600; overflow-wrap: anywhere; }
   .rec .sub2 { grid-column: 1 / -1; font-size: 12px; color: var(--kimi-color-text-secondary); overflow-wrap: anywhere; }
   .rec a {
@@ -172,7 +172,7 @@
     padding: 9px; border: none; border-block-start: 1px solid var(--kimi-color-border);
     background: transparent; color: var(--kimi-color-accent); font-weight: 600;
   }
-  .expand-btn:hover { background: color-mix(in srgb, var(--kimi-color-accent, #2f6fed) 6%, transparent); }
+  .expand-btn:hover { background: color-mix(in srgb, var(--kimi-color-accent) 6%, transparent); }
 
   /* ---------- 互认地图 ---------- */
   .card {
@@ -210,7 +210,7 @@
 <main class="kimi-host-safe-context" data-kimi-root>
   <header class="kimi-host-safe-header hero">
     <h1>仿制药全球许可查询</h1>
-    <p class="sub">Generic API Checker · 各国已获批同 API 药品目录 · 技术证明文件互认地图</p>
+    <p class="sub">Generic API Checker · 各来源覆盖范围内同 API 产品记录 · 监管互认／依赖机制提示</p>
     <div class="stats" id="stats"></div>
   </header>
 
@@ -247,17 +247,17 @@
   <section id="results" hidden>
     <div id="groups" data-kimi-priority="p1"></div>
     <div class="card" data-kimi-priority="p2">
-      <h2>🌐 互认地图：相同技术证明文件可用范围</h2>
-      <p class="desc">实色 = 该 API 已获批；虚线框 = 可凭相同技术证明文件（CTD/DMF/CEP 等）使用的辖区；箭头 = 互认/信赖机制</p>
-      <svg id="map" viewBox="0 0 720 300" role="img" aria-label="技术证明文件互认示意图"></svg>
+      <h2>🌐 监管机制提示：可能相关的互认／依赖安排</h2>
+      <p class="desc">实色 = 数据库收录该 API 相关记录的辖区；虚线框 = 存在可能相关的监管机制。仅作规则入口提示，须另行核对企业、产品、生产场地、资料类型、出具机构、有效状态及目标国现行要求</p>
+      <svg id="map" viewBox="0 0 720 300" role="img" aria-label="潜在相关监管互认／依赖机制示意图"></svg>
       <div class="legend">
-        <span class="lg-a"><i></i>已获批该 API</span>
-        <span class="lg-u"><i></i>可凭相同技术文件使用</span>
+        <span class="lg-a"><i></i>数据库收录该 API 相关记录</span>
+        <span class="lg-u"><i></i>存在潜在相关机制（须核实条件）</span>
       </div>
     </div>
     <div class="card" data-kimi-priority="p2">
       <h2>📋 机制提示</h2>
-      <p class="desc">除「疗效结论互认（制度化）」外，其余机制不替代目标国注册程序</p>
+      <p class="desc">以下提示由 API 检索结果所属辖区关联触发，不代表查询企业已持有相应资料、满足适用条件或可获得目标国接受；所有机制均须结合具体项目和目标机构现行规定核实</p>
       <div id="hints" class="hints"></div>
     </div>
   </section>
@@ -376,7 +376,7 @@ const DATA = __WIDGET_DATA__;
       const recHtml = rows.map((r, i) => `
           <div class="rec${i >= PAGE ? ' hidden-rec' : ''}">
             <span class="pn">${esc(r.pn)}</span>
-            ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">许可链接 ↗</a>` : '<span></span>'}
+            ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">来源链接 ↗</a>` : '<span></span>'}
             <span class="sub2">${r.lic ? `批件号 <code class="mono">${esc(r.lic)}</code>` : ''}${r.date ? ` · 批准 ${esc(r.date)}` : ''}${r.app ? ` · ${esc(r.app)}` : ''}</span>
           </div>`).join('');
       g.innerHTML = `<header>
@@ -458,7 +458,7 @@ const DATA = __WIDGET_DATA__;
       <div class="hint">
         <div class="h-t">${esc(r.id)} <span class="scope">· ${esc(r.scope)}</span></div>
         <div class="h-d">${esc(r.doc_type)}</div>
-        <div class="h-u"><b>可使用于：</b>${r.usable_in.length ? r.usable_in.map(codeLabel).map(esc).join('；') : '（无自动互认目标，见说明）'}</div>
+        <div class="h-u"><b>可能涉及的目标辖区：</b>${r.usable_in.length ? r.usable_in.map(codeLabel).map(esc).join('；') : '（无自动互认目标，见说明）'}</div>
         <div class="h-d">${esc(r.note)}</div>
       </div>`).join('');
   }
@@ -482,7 +482,7 @@ const DATA = __WIDGET_DATA__;
       if (rows.length) {
         const gc = new Set(rows.map(x => x.c)).size;
         const disp = r.zh ? `${r.zh}${r.term && r.term !== r.zh ? ' / ' + r.term : ''}` : r.term;
-        headlineText = `${disp} · 已在 ${gc} 个辖区获批 · 共 ${rows.length} 条`;
+        headlineText = `${disp} · 在 ${gc} 个辖区命中相关公开记录 · 共 ${rows.length} 条`;
       }
       emptyHint = `未在数据库中检索到「${q}」，可尝试英文通用名或去掉剂型后缀`;
     }
@@ -530,7 +530,7 @@ const DATA = __WIDGET_DATA__;
   };
   const PLACEHOLDERS = {
     api: '输入 API 中/英文名，如：阿托伐他汀 / atorvastatin',
-    mfr: '输入厂家名称（中/英文），如：石药集团 / Teva',
+    mfr: '输入厂家名称（中/英文均可），如：石药集团 / Teva',
   };
   const input = $('#q');
   function setMode(m) {
@@ -547,8 +547,8 @@ const DATA = __WIDGET_DATA__;
       ex.appendChild(b);
     }
     $('#headline').innerHTML = '<span class="empty">' +
-      (m === 'api' ? '输入一个仿制药 API，查看它在哪些国家已获批，以及相同技术证明文件还能在哪些国家使用。'
-                   : '输入厂家名称，查看该厂家在哪些国家拥有已获批上市的仿制药。') + '</span>';
+      (m === 'api' ? '输入一个 API，查看各来源覆盖范围内的相关产品记录，以及可能相关的监管互认／依赖机制。'
+                   : '输入厂家名称，查看该厂家在已接入来源中的相关产品记录。') + '</span>';
     $('#headmeta').textContent = '';
     $('#results').hidden = true; $('#juris').hidden = true;
   }
@@ -560,7 +560,7 @@ const DATA = __WIDGET_DATA__;
   // 顶部统计
   const jurisCount = new Set(DATA.products.map(p => p.c)).size;
   $('#stats').innerHTML =
-    `<span class="stat"><b>${DATA.products.length.toLocaleString()}</b>条许可记录</span>` +
+    `<span class="stat"><b>${DATA.products.length.toLocaleString()}</b>条产品记录</span>` +
     `<span class="stat"><b>${jurisCount}</b>个辖区</span>` +
     `<span class="stat">快照 <b>${String(DATA.generated_at).slice(0, 10)}</b></span>`;
 
@@ -579,9 +579,9 @@ const DATA = __WIDGET_DATA__;
   $('#foot').innerHTML =
     `数据快照：${DATA.generated_at}（${DATA.products.length.toLocaleString()} 条）<br>` +
     `来源：美国 FDA Drugs@FDA · 欧盟 Union Register · 中国 NMPA/CDE 化学药品目录集 等官方站点<br>` +
-    `本工具仅聚合各国监管机构公开数据，供研究参考，不构成注册申报或法律意见。`;
+    `本工具仅聚合各国监管机构公开数据，供研究参考，不构成注册申报或法律意见。互认／依赖提示不代表企业资料可复用或目标国接受。`;
 
-  $('#headline').innerHTML = '<span class="empty">输入一个仿制药 API，查看它在哪些国家已获批，以及相同技术证明文件还能在哪些国家使用。</span>';
+  $('#headline').innerHTML = '<span class="empty">输入一个 API，查看各来源覆盖范围内的相关产品记录，以及可能相关的监管互认／依赖机制。</span>';
 })();
 </script>
 <script>
@@ -589,7 +589,7 @@ const DATA = __WIDGET_DATA__;
 (function (global) {
   'use strict';
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-  function seeded(seed) { let s = (Number(seed) || 1) >>> 0; return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+  function seeded(seed) { return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
   function densityAt(mode, x, y, config) {
     if (mode === 'directional') {
       const angle = (Number(config.flowAngleDeg) || 0) * Math.PI / 180;
@@ -605,25 +605,25 @@ const DATA = __WIDGET_DATA__;
     const config = Object.assign({ mode: 'directional', mark: 'ascii', seed: 7, spacing: 14, opacity: 0.4,
       pointer: true, pointerTarget: null, pointerRadius: 96, pointerStrength: 12, flowAngleDeg: 12,
       driftSpeed: 0, variance: 0.34, tier: 'regular', characters: '.:+*#' }, options || {});
-    const pointerTarget = config.pointerTarget || container;
+    const pointerTarget = options.pointerTarget || container;
     const media = typeof global.matchMedia === 'function' ? global.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
     const reduced = config.tier === 'compact' || media.matches;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.setAttribute('aria-hidden', 'true');
-    Object.assign(canvas.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', zIndex: '0' });
+    Object.assign(canvas.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' });
     container.appendChild(canvas);
     let marks = [], pointer = null, frame = 0, destroyed = false;
-    function dims() { const r = container.getBoundingClientRect(); return { w: Math.max(1, r.width), h: Math.max(1, r.height) }; }
+    function dims() { const r = container.getBoundingClientRect(); return { w: r.width, h: r.height }; }
     function rebuild() {
       const { w, h } = dims();
       const ratio = Math.min(global.devicePixelRatio || 1, 2);
       canvas.width = Math.round(w * ratio); canvas.height = Math.round(h * ratio);
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 1);
       const gap = Math.max(8, config.spacing);
       const random = seeded(config.seed);
       const next = [];
-      for (let y = gap / 2; y < h; y += gap) for (let x = gap / 2; x < w; x += gap) {
+      for (let y = gap; y < h; y += gap) for (let x = gap; x < w; x += gap) {
         const d = densityAt(config.mode, x / w, y / h, config);
         if (random() > d * 0.84) continue;
         next.push({ x: x + (random() - 0.5) * gap * config.variance, y: y + (random() - 0.5) * gap * config.variance, d });
@@ -642,14 +642,14 @@ const DATA = __WIDGET_DATA__;
           const dx = x - pointer.x, dy = y - pointer.y;
           const dist = Math.sqrt(dx * dx + dy * dy) || 1;
           if (dist < config.pointerRadius) {
-            const f = (1 - dist / config.pointerRadius) * config.pointerStrength;
-            x += dx / dist * f; y += dy / dist * f;
+            const force = (1 - dist / config.pointerRadius) * config.pointerStrength;
+            x += dx / dist * force; y += dy / dist * force;
           }
         }
         ctx.globalAlpha = clamp(config.opacity * (0.34 + m.d * 0.66), 0.04, 0.7);
-        const chars = config.characters;
+        const chars = m.d > 0.66 ? config.characters[2] : (m.d > 0.33 ? config.characters[1] : config.characters[0]);
         ctx.font = `${Math.round(7 + m.d * 4)}px var(--kimi-font-mono, monospace)`;
-        ctx.fillText(chars[Math.min(chars.length - 1, Math.floor(m.d * chars.length))], x, y);
+        ctx.fillText(chars, Math.min(w - 8, Math.max(0, x)), Math.min(h - 8, Math.max(8, y)));
       }
       ctx.globalAlpha = 1;
     }
