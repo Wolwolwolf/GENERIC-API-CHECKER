@@ -5,9 +5,9 @@
       "country": "美国",
       "authority": "US FDA (CDER/OGD)",
       "adapter": "fda",
-      "enabled": false,
+      "enabled": true,
       "official_url": "https://www.accessdata.fda.gov/scripts/cder/daf/",
-      "note": "全量 ANDA 目录已通过 fda_full_import.py 从 Drugs@FDA 官方数据文件导入；周更跳过 openFDA 增量以避免批件号格式差异造成重复"
+      "note": "全量 ANDA 目录已通过 fda_full_import.py 从 Drugs@FDA 官方数据文件导入；日常周更通过 openFDA 按时间窗增量更新，需要全量校正时重跑全量导入脚本"
     },
     {
       "code": "EU",
@@ -98,7 +98,7 @@
       "adapter": "csv",
       "enabled": false,
       "official_url": "https://dav.gov.vn/",
-      "note": "DAV 注册药品公示"
+      "note": "DAV 药品注册公示"
     },
     {
       "code": "PFDA",
